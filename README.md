@@ -12,9 +12,25 @@
 
 **A [Model Context Protocol](https://modelcontextprotocol.io) server that gives Claude safe, structured read/write access to an [Obsidian](https://obsidian.md) vault — and turns YouTube videos into beautifully structured, cross-linked notes.**
 
-[Features](#-features) · [Tools](#-tools) · [The pipeline](#-the-process-youtube-pipeline) · [Quick start](#-quick-start) · [Architecture](#-architecture) · [Roadmap](#-roadmap)
+[Install](#-install) · [Features](#-features) · [Tools](#-tools) · [The pipeline](#-the-process-youtube-pipeline) · [Quick start](#-quick-start) · [Architecture](#-architecture) · [Roadmap](#-roadmap)
 
 </div>
+
+---
+
+## 📦 Install
+
+An MCP server isn't a global install — **each user registers it once in their own MCP client.** It takes about two minutes:
+
+```bash
+git clone https://github.com/zenobioscastillo1-source/obsidian-knowledge-pipeline
+cd obsidian-knowledge-pipeline
+uv sync                          # install dependencies
+# then set VAULT_PATH in .env to your Obsidian vault's root folder
+claude mcp add obsidian-knowledge-pipeline -- uv --directory "$PWD" run python server.py
+```
+
+Restart Claude Code and the 4 vault tools, 2 YouTube tools, and the `/process-youtube` prompt are available. Using Claude Desktop, the MCP Inspector, or plain pip instead? See [Quick start](#-quick-start). *(`$PWD` works in bash/zsh; on Windows PowerShell use the folder's absolute path.)*
 
 ---
 
@@ -210,6 +226,7 @@ obsidian-knowledge-pipeline/
 - ✅ **Phase 2** — YouTube transcript + metadata extraction
 - ✅ **Phase 3** — the `process-youtube` prompt → structured notes + per-theme Obsidian Base index
 - 🔭 **Drafted** — `get_youtube_frames`, so Claude can *watch* a video's keyframes (see [the spec](obsidian-mcp-spec.md))
+- 📇 **Registry-ready** — a [`server.json`](server.json) scaffold for the [official MCP registry](https://github.com/modelcontextprotocol/registry) is included; listing there also needs a PyPI release + namespace auth via the `mcp-publisher` CLI
 
 ---
 
