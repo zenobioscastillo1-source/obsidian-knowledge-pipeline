@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1200 470" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="Architecture: an MCP client talks over stdio to the FastMCP server, whose tools reach YouTube and the Obsidian vault through a path guard">
+  <rect x="2" y="2" width="1196" height="466" rx="18" fill="#0b0f19" stroke="#222a3d" stroke-width="2"/>
+  <text x="40" y="44" font-size="18" font-weight="600" fill="#e6e8ee">Architecture</text>
+
+  <!-- Client -->
+  <rect x="36" y="196" width="184" height="104" rx="12" fill="#3c3489" stroke="#afa9ec" stroke-width="0.75"/>
+  <text x="128" y="234" text-anchor="middle" font-size="15" font-weight="600" fill="#cecbf6">MCP Client</text>
+  <text x="128" y="258" text-anchor="middle" font-size="12" fill="#afa9ec">Claude Code · Desktop</text>
+  <text x="128" y="276" text-anchor="middle" font-size="12" fill="#afa9ec">MCP Inspector</text>
+
+  <!-- stdio arrow -->
+  <text x="263" y="240" text-anchor="middle" font-size="11" font-weight="500" fill="#9aa3b8">stdio</text>
+  <path d="M222 248 L296 248" stroke="#9c9a92" stroke-width="2" opacity="0.7"/>
+  <path d="M296 243 L304 248 L296 253 Z" fill="#9c9a92" opacity="0.8"/>
+
+  <!-- Server container -->
+  <rect x="308" y="64" width="520" height="372" rx="16" fill="#0e1422" stroke="#2b3450" stroke-width="1.5"/>
+  <text x="328" y="98" font-size="15" font-weight="600" fill="#e6e8ee">obsidian-knowledge-pipeline</text>
+  <rect x="730" y="80" width="80" height="24" rx="12" fill="#10182a" stroke="#2b3450"/>
+  <text x="770" y="97" text-anchor="middle" font-size="12" font-weight="500" fill="#cecbf6">FastMCP</text>
+
+  <!-- vault tools -->
+  <rect x="328" y="118" width="232" height="128" rx="11" fill="#0c447c" stroke="#85b7eb" stroke-width="0.75"/>
+  <text x="346" y="143" font-size="13.5" font-weight="600" fill="#b5d4f4">tools/vault.py</text>
+  <text x="346" y="168" font-size="12" fill="#b5d4f4">search_vault</text>
+  <text x="346" y="188" font-size="12" fill="#b5d4f4">read_note</text>
+  <text x="346" y="208" font-size="12" fill="#b5d4f4">create_note</text>
+  <text x="346" y="228" font-size="12" fill="#b5d4f4">list_folder</text>
+
+  <!-- youtube tools -->
+  <rect x="576" y="118" width="232" height="128" rx="11" fill="#712b13" stroke="#f0997b" stroke-width="0.75"/>
+  <text x="594" y="143" font-size="13.5" font-weight="600" fill="#f5c4b3">tools/youtube.py</text>
+  <text x="594" y="168" font-size="12" fill="#f5c4b3">get_youtube_transcript</text>
+  <text x="594" y="188" font-size="12" fill="#f5c4b3">get_youtube_metadata</text>
+
+  <!-- prompt -->
+  <rect x="328" y="258" width="480" height="62" rx="11" fill="#27500a" stroke="#97c459" stroke-width="0.75"/>
+  <text x="346" y="284" font-size="13.5" font-weight="600" fill="#c0dd97">prompts/process_youtube.py</text>
+  <text x="346" y="304" font-size="12" fill="#97c459">process-youtube — orchestrates the tools into one pipeline</text>
+
+  <!-- config / path guard -->
+  <rect x="328" y="332" width="480" height="62" rx="11" fill="#633806" stroke="#ef9f27" stroke-width="0.75"/>
+  <text x="346" y="358" font-size="13.5" font-weight="600" fill="#fac775">config.py — security choke point</text>
+  <text x="346" y="378" font-size="12" fill="#ef9f27">resolve_in_vault() blocks path traversal · loads VAULT_PATH</text>
+
+  <!-- External: YouTube -->
+  <rect x="868" y="118" width="296" height="110" rx="12" fill="#712b13" stroke="#f0997b" stroke-width="0.75"/>
+  <text x="888" y="152" font-size="15" font-weight="600" fill="#f5c4b3">YouTube</text>
+  <text x="888" y="178" font-size="12" fill="#f0997b">oEmbed (metadata, keyless)</text>
+  <text x="888" y="198" font-size="12" fill="#f0997b">youtube-transcript-api</text>
+
+  <!-- External: Vault -->
+  <rect x="868" y="286" width="296" height="150" rx="12" fill="#085041" stroke="#5dcaa5" stroke-width="0.75"/>
+  <text x="888" y="320" font-size="15" font-weight="600" fill="#9fe1cb">Obsidian Vault</text>
+  <text x="888" y="346" font-size="12" fill="#5dcaa5">6 - Main Notes/ · 3 - Tags/</text>
+  <text x="888" y="366" font-size="12" fill="#5dcaa5">4 - Indexes/ (.base) · 2 - Source…</text>
+  <text x="888" y="392" font-size="11.5" fill="#6f9f8f">confined to VAULT_PATH —</text>
+  <text x="888" y="409" font-size="11.5" fill="#6f9f8f">no traversal outside it</text>
+
+  <!-- arrows to externals -->
+  <text x="812" y="170" font-size="11" fill="#9aa3b8">HTTPS</text>
+  <path d="M810 182 L862 182" stroke="#9c9a92" stroke-width="2" opacity="0.7"/>
+  <path d="M862 177 L870 182 L862 187 Z" fill="#9c9a92" opacity="0.8"/>
+
+  <text x="812" y="352" font-size="11" fill="#9aa3b8">filesystem</text>
+  <path d="M810 364 L862 364" stroke="#9c9a92" stroke-width="2" opacity="0.7"/>
+  <path d="M862 359 L870 364 L862 369 Z" fill="#9c9a92" opacity="0.8"/>
+</svg>

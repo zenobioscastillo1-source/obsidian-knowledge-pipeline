@@ -1,0 +1,65 @@
+<svg viewBox="0 0 1200 320" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="Obsidian Knowledge Pipeline — an MCP server that turns YouTube videos into structured Obsidian notes">
+  <defs>
+    <linearGradient id="title" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#afa9ec"/>
+      <stop offset="0.5" stop-color="#85b7eb"/>
+      <stop offset="1" stop-color="#5dcaa5"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f0997b"/>
+      <stop offset="0.5" stop-color="#afa9ec"/>
+      <stop offset="1" stop-color="#5dcaa5"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="2" y="2" width="1196" height="316" rx="18" fill="#0b0f19" stroke="#222a3d" stroke-width="2"/>
+  <rect x="2" y="2" width="1196" height="6" rx="3" fill="url(#accent)"/>
+
+  <!-- Eyebrow -->
+  <text x="64" y="74" font-size="14" font-weight="600" letter-spacing="3" fill="#5dcaa5">MODEL CONTEXT PROTOCOL · SERVER</text>
+
+  <!-- Title -->
+  <text x="62" y="140" font-size="56" font-weight="700" fill="url(#title)">Obsidian Knowledge</text>
+  <text x="62" y="200" font-size="56" font-weight="700" fill="url(#title)">Pipeline</text>
+
+  <!-- Subtitle -->
+  <text x="64" y="238" font-size="18" font-weight="400" fill="#9aa3b8">Turn YouTube videos into structured, cross-linked Obsidian notes —</text>
+  <text x="64" y="262" font-size="18" font-weight="400" fill="#9aa3b8">modules, SVG diagrams, tags, and a live Obsidian Bases index.</text>
+
+  <!-- Pills -->
+  <g font-size="13" font-weight="500">
+    <rect x="64" y="280" width="104" height="26" rx="13" fill="#10182a" stroke="#2b3450"/>
+    <text x="116" y="297" text-anchor="middle" fill="#b5d4f4">Python 3.13</text>
+    <rect x="176" y="280" width="118" height="26" rx="13" fill="#10182a" stroke="#2b3450"/>
+    <text x="235" y="297" text-anchor="middle" fill="#cecbf6">MCP · FastMCP</text>
+    <rect x="302" y="280" width="64" height="26" rx="13" fill="#10182a" stroke="#2b3450"/>
+    <text x="334" y="297" text-anchor="middle" fill="#9fe1cb">stdio</text>
+    <rect x="374" y="280" width="108" height="26" rx="13" fill="#10182a" stroke="#2b3450"/>
+    <text x="428" y="297" text-anchor="middle" fill="#fac775">no API keys</text>
+  </g>
+
+  <!-- Pipeline motif (right) -->
+  <g>
+    <rect x="858" y="44" width="280" height="62" rx="12" fill="#712b13" stroke="#f0997b" stroke-width="0.75"/>
+    <circle cx="892" cy="75" r="13" fill="#0b0f19" stroke="#f0997b"/>
+    <path d="M888 69 L900 75 L888 81 Z" fill="#f5c4b3"/>
+    <text x="918" y="71" font-size="15" font-weight="600" fill="#f5c4b3">YouTube video</text>
+    <text x="918" y="89" font-size="12" fill="#f0997b">transcript + metadata</text>
+
+    <rect x="858" y="129" width="280" height="62" rx="12" fill="#3c3489" stroke="#afa9ec" stroke-width="0.75"/>
+    <rect x="880" y="148" width="24" height="24" rx="6" fill="#0b0f19" stroke="#afa9ec"/>
+    <circle cx="892" cy="160" r="5" fill="#cecbf6"/>
+    <text x="918" y="156" font-size="15" font-weight="600" fill="#cecbf6">MCP server</text>
+    <text x="918" y="174" font-size="12" fill="#afa9ec">6 tools + process-youtube</text>
+
+    <rect x="858" y="214" width="280" height="62" rx="12" fill="#085041" stroke="#5dcaa5" stroke-width="0.75"/>
+    <path d="M880 247 l12 -8 l12 8 v8 a2 2 0 0 1 -2 2 h-20 a2 2 0 0 1 -2 -2 Z" fill="#0b0f19" stroke="#5dcaa5"/>
+    <text x="918" y="241" font-size="15" font-weight="600" fill="#9fe1cb">Obsidian vault</text>
+    <text x="918" y="259" font-size="12" fill="#5dcaa5">modules · tags · Bases</text>
+
+    <path d="M998 106 L998 127" stroke="#9c9a92" stroke-width="2" opacity="0.5"/>
+    <path d="M993 121 L998 129 L1003 121 Z" fill="#9c9a92" opacity="0.6"/>
+    <path d="M998 191 L998 212" stroke="#9c9a92" stroke-width="2" opacity="0.5"/>
+    <path d="M993 206 L998 214 L1003 206 Z" fill="#9c9a92" opacity="0.6"/>
+  </g>
+</svg>

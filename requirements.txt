@@ -1,0 +1,6 @@
+# Authoritative dependency management is pyproject.toml + uv.lock (use `uv sync`).
+# This file is kept for MCP Inspector / plain-pip users:  pip install -r requirements.txt
+mcp[cli]
+python-dotenv
+httpx
+youtube-transcript-api

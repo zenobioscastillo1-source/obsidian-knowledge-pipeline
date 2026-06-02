@@ -1,0 +1,68 @@
+<svg viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="The process-youtube pipeline: extract, scan vault, analyze, write to the vault">
+  <rect x="2" y="2" width="1196" height="356" rx="18" fill="#0b0f19" stroke="#222a3d" stroke-width="2"/>
+  <text x="40" y="46" font-size="18" font-weight="600" fill="#e6e8ee">The <tspan fill="#85b7eb">process-youtube</tspan> pipeline</text>
+  <text x="40" y="68" font-size="13" fill="#9aa3b8">One prompt orchestrates the tools end to end.</text>
+
+  <!-- Stage cards -->
+  <g>
+    <!-- 1 Extract -->
+    <rect x="40" y="92" width="240" height="120" rx="12" fill="#712b13" stroke="#f0997b" stroke-width="0.75"/>
+    <circle cx="66" cy="118" r="13" fill="#0b0f19" stroke="#f0997b"/>
+    <text x="66" y="123" text-anchor="middle" font-size="14" font-weight="700" fill="#f5c4b3">1</text>
+    <text x="90" y="123" font-size="16" font-weight="600" fill="#f5c4b3">EXTRACT</text>
+    <text x="60" y="158" font-size="12.5" fill="#f5c4b3">get_youtube_metadata</text>
+    <text x="60" y="180" font-size="12.5" fill="#f5c4b3">get_youtube_transcript</text>
+
+    <!-- 2 Scan -->
+    <rect x="320" y="92" width="240" height="120" rx="12" fill="#0c447c" stroke="#85b7eb" stroke-width="0.75"/>
+    <circle cx="346" cy="118" r="13" fill="#0b0f19" stroke="#85b7eb"/>
+    <text x="346" y="123" text-anchor="middle" font-size="14" font-weight="700" fill="#b5d4f4">2</text>
+    <text x="370" y="123" font-size="16" font-weight="600" fill="#b5d4f4">SCAN VAULT</text>
+    <text x="340" y="158" font-size="12.5" fill="#b5d4f4">search_vault → existing tags</text>
+    <text x="340" y="180" font-size="12.5" fill="#b5d4f4">list_folder → themes</text>
+
+    <!-- 3 Analyze -->
+    <rect x="600" y="92" width="240" height="120" rx="12" fill="#3c3489" stroke="#afa9ec" stroke-width="0.75"/>
+    <circle cx="626" cy="118" r="13" fill="#0b0f19" stroke="#afa9ec"/>
+    <text x="626" y="123" text-anchor="middle" font-size="14" font-weight="700" fill="#cecbf6">3</text>
+    <text x="650" y="123" font-size="16" font-weight="600" fill="#cecbf6">ANALYZE</text>
+    <text x="620" y="158" font-size="12.5" fill="#cecbf6">split into 3–7 modules</text>
+    <text x="620" y="180" font-size="12.5" fill="#cecbf6">tags · tables · SVG diagrams</text>
+
+    <!-- 4 Write -->
+    <rect x="880" y="92" width="240" height="120" rx="12" fill="#27500a" stroke="#97c459" stroke-width="0.75"/>
+    <circle cx="906" cy="118" r="13" fill="#0b0f19" stroke="#97c459"/>
+    <text x="906" y="123" text-anchor="middle" font-size="14" font-weight="700" fill="#c0dd97">4</text>
+    <text x="930" y="123" font-size="16" font-weight="600" fill="#c0dd97">WRITE</text>
+    <text x="900" y="158" font-size="12.5" fill="#c0dd97">create_note × N</text>
+    <text x="900" y="180" font-size="12.5" fill="#c0dd97">modules · overview · tags · base</text>
+  </g>
+
+  <!-- Arrows between stages -->
+  <g fill="#9c9a92" opacity="0.7">
+    <path d="M286 152 L308 152" stroke="#9c9a92" stroke-width="2"/>
+    <path d="M308 147 L316 152 L308 157 Z"/>
+    <path d="M566 152 L588 152" stroke="#9c9a92" stroke-width="2"/>
+    <path d="M588 147 L596 152 L588 157 Z"/>
+    <path d="M846 152 L868 152" stroke="#9c9a92" stroke-width="2"/>
+    <path d="M868 147 L876 152 L868 157 Z"/>
+  </g>
+
+  <!-- Output band -->
+  <text x="40" y="252" font-size="13" font-weight="600" letter-spacing="1.5" fill="#6f7891">RESULT IN YOUR OBSIDIAN VAULT</text>
+  <g>
+    <rect x="40" y="266" width="372" height="64" rx="10" fill="#085041" stroke="#5dcaa5" stroke-width="0.75"/>
+    <text x="58" y="294" font-size="13.5" font-weight="600" fill="#9fe1cb">6 - Main Notes/&lt;folder&gt;/</text>
+    <text x="58" y="314" font-size="12" fill="#5dcaa5">module notes + “&lt;Source&gt; — Overview”</text>
+
+    <rect x="430" y="266" width="300" height="64" rx="10" fill="#633806" stroke="#ef9f27" stroke-width="0.75"/>
+    <text x="448" y="294" font-size="13.5" font-weight="600" fill="#fac775">3 - Tags/</text>
+    <text x="448" y="314" font-size="12" fill="#ef9f27">new concept stubs (deduped)</text>
+
+    <rect x="748" y="266" width="412" height="64" rx="10" fill="#3c3489" stroke="#afa9ec" stroke-width="0.75"/>
+    <text x="766" y="294" font-size="13.5" font-weight="600" fill="#cecbf6">4 - Indexes/&lt;Theme&gt;.base</text>
+    <text x="766" y="314" font-size="12" fill="#afa9ec">live per-theme index, grouped by source</text>
+  </g>
+  <path d="M1000 212 L1000 262" stroke="#9c9a92" stroke-width="2" opacity="0.5"/>
+  <path d="M995 256 L1000 264 L1005 256 Z" fill="#9c9a92" opacity="0.6"/>
+</svg>
