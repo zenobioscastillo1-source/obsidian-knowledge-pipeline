@@ -40,6 +40,55 @@ def _iso_mtime(path: Path) -> str:
     return datetime.fromtimestamp(path.stat().st_mtime).isoformat(timespec="seconds")
 
 
+# Telltale substrings that appear when UTF-8 text has been decoded as Windows-1252
+# / Latin-1 and then re-saved ("mojibake"). For example an em dash "—" (UTF-8
+# bytes E2 80 94) misread that way becomes the three characters "â€"". These
+# sequences effectively never occur in correct text, so their presence is a
+# reliable trigger to attempt a repair.
+_MOJIBAKE_MARKERS = (
+    "â€",  # em/en dashes, curly quotes, ellipsis, bullet (â€", â€™, â€œ, â€¦, â€¢)
+    "â†",  # arrows (â†', â†")
+    "â„¢",  # ™
+    "Â ", "Â°", "Â±", "Â·", "Â«", "Â»",  # Latin-1 supplement misreads
+    "Ã©", "Ã¨", "Ã ", "Ã¢", "Ã®", "Ã´", "Ã»", "Ã§", "Ã±",  # accented letters
+    "Ã¼", "Ã¶", "Ã¤", "Ã³", "Ã­", "Ã¡", "Ã©",
+)
+
+
+def _mojibake_score(text: str) -> int:
+    """Count occurrences of known mojibake signatures in ``text``."""
+    return sum(text.count(marker) for marker in _MOJIBAKE_MARKERS)
+
+
+def _fix_mojibake(text: str) -> str:
+    """Repair UTF-8-decoded-as-Windows-1252 double-encoding, if present.
+
+    Upstream text sources (PDF extractors, web scrapers, some MCP hosts) can hand
+    us content where an em dash "—" has already become "â€"", an apostrophe "’"
+    has become "â€™", and so on. Writing that faithfully as UTF-8 would bake the
+    corruption into the note. We undo it with the exact inverse transform
+    (re-encode as cp1252, decode as UTF-8), but conservatively — only when:
+
+      * a mojibake signature is actually present (clean text is never touched),
+      * the round-trip succeeds without error, and
+      * it strictly reduces the mojibake and introduces no U+FFFD replacement
+        characters.
+
+    Anything ambiguous is returned unchanged: the guard never makes text worse.
+    """
+    if _mojibake_score(text) == 0:
+        return text
+    try:
+        repaired = text.encode("cp1252").decode("utf-8")
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return text
+    if "�" in repaired and "�" not in text:
+        return text
+    if _mojibake_score(repaired) < _mojibake_score(text):
+        return repaired
+    return text
+
+
 def register_vault_tools(mcp: FastMCP) -> None:
     """Register all four vault tools on the given FastMCP instance."""
 
@@ -181,9 +230,14 @@ def register_vault_tools(mcp: FastMCP) -> None:
                 "conventionally use spaces."
             )
 
+        # Repair any mojibake (UTF-8 mis-decoded as Windows-1252) that arrived in
+        # the content before we commit it to disk, so corrupted text never lands
+        # in the vault regardless of where it came from.
+        clean_content = _fix_mojibake(content)
+
         try:
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(content, encoding="utf-8")
+            target.write_text(clean_content, encoding="utf-8")
         except OSError as exc:
             return {"error": f"Could not write note: {exc}", "created": False}
 
@@ -192,6 +246,8 @@ def register_vault_tools(mcp: FastMCP) -> None:
             "path": _rel(target),
             "size_bytes": target.stat().st_size,
         }
+        if clean_content != content:
+            result["repaired_encoding"] = True
         if warning:
             result["warning"] = warning
         return result
