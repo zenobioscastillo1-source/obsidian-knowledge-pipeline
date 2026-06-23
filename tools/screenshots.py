@@ -194,6 +194,38 @@ def _parse_pages(spec: str, page_count: int) -> list[int]:
     return sorted(i for i in indices if 0 <= i < page_count)
 
 
+def _page_reference(page, pdf_page: int, offset: int) -> tuple[str, str | None]:
+    """Resolve the page number a *reader* would recognise for ``page``.
+
+    A PDF's page index (1 = first sheet) often differs from the number printed
+    in the book, because of front matter (cover, title, TOC). So a capture of
+    "PDF page 47" may really be printed page 35 — naming it ``p.47`` sends the
+    reader to the wrong place.
+
+    Resolution order:
+      1. The page's own embedded label (``page.get_label()``) when present and
+         different from the raw index — this is the authoritative printed page
+         (e.g. ``"iii"``, ``"35"``), used automatically with no configuration.
+      2. Otherwise, if ``offset`` is given, the index shifted by it
+         (``pdf_page + offset``) — a manual fallback for PDFs that embed no
+         labels (like many ebook exports).
+      3. Otherwise the raw PDF index.
+
+    Returns ``(page_ref, embedded_label)`` where ``page_ref`` is the string to
+    show, and ``embedded_label`` is the label from step 1 if one was used (else
+    ``None``), so callers can record where the number came from.
+    """
+    try:
+        label = (page.get_label() or "").strip()
+    except Exception:  # noqa: BLE001 — older/edge PDFs may not support labels
+        label = ""
+    if label and label != str(pdf_page):
+        return label, label
+    if offset:
+        return str(pdf_page + offset), None
+    return str(pdf_page), None
+
+
 def _parse_clock(value: str | None) -> float | None:
     """Parse ``"mm:ss"``, ``"hh:mm:ss"``, or a bare seconds number into seconds."""
     if value is None or str(value).strip() == "":
@@ -230,6 +262,7 @@ def register_media_tools(mcp: FastMCP) -> None:
         source_name: str = "",
         region: str | None = None,
         dpi: int = 300,
+        page_label_offset: int = 0,
         analysis_width: int = _ANALYSIS_WIDTH,
         embed_width: int = _EMBED_WIDTH,
         save: bool = True,
@@ -255,6 +288,11 @@ def register_media_tools(mcp: FastMCP) -> None:
                 ``"x0,y0,x1,y1"`` in 0–1 (e.g. ``"0,0,0.5,0.5"`` = top-left
                 quarter) to grab just one figure/diagram. Omit for the whole page.
             dpi: Render resolution for the saved HD image (default ``300``).
+            page_label_offset: Fallback for PDFs that embed no page labels. The
+                printed page is taken automatically from the PDF's own labels
+                when present; otherwise captions use the raw PDF index shifted by
+                this number (e.g. ``-12`` if 12 pages of front matter precede
+                printed page 1). Default ``0`` (use the raw index).
             analysis_width: Width (px) of the downscaled copy sent to the model
                 (default ``1024``) to control token cost.
             embed_width: Display width (px) baked into the Obsidian embed so the
@@ -338,17 +376,33 @@ def register_media_tools(mcp: FastMCP) -> None:
                 doc.close()
                 return {"error": f"Failed to render page {idx + 1}: {exc}"}
 
+            # Prefer the page number a reader recognises (printed label) over the
+            # raw PDF index, so captions point to the right place in the source.
+            pdf_page = idx + 1
+            page_ref, page_label = _page_reference(page, pdf_page, page_label_offset)
+            differs = page_ref != str(pdf_page)
+
             # A cropped region is marked "(detail)" so it is never confused with —
             # or silently collision-renamed against — a full-page capture of the
             # same page (the reader can tell a zoomed-in figure from the whole page).
-            locator = f"p.{idx + 1} (detail)" if clip else f"p.{idx + 1}"
-            name_part = f"p.{idx + 1} detail" if clip else f"p.{idx + 1}"
-            filename = f"{label} {name_part}.png"
+            detail = " (detail)" if clip else ""
+            # When the printed page differs from the PDF index, name both so the
+            # reader can find it in the book or in a PDF reader.
+            locator = (
+                f"p.{page_ref} (PDF p.{pdf_page}){detail}"
+                if differs
+                else f"p.{pdf_page}{detail}"
+            )
+            filename = f"{label} p.{page_ref}{' detail' if clip else ''}.png"
             record, image = _save_and_block(
                 png_bytes, folder, filename, label, locator,
                 analysis_width, save, return_images, embed_width,
             )
-            record["page"] = idx + 1
+            record["page"] = pdf_page
+            if differs:
+                record["page_ref"] = page_ref
+            if page_label is not None:
+                record["page_label"] = page_label
             records.append(record)
             if image is not None:
                 images.append(image)

@@ -599,6 +599,13 @@ Configure the server in both clients.
 > as thumbnails, not full-screen. Saves are guarded by `resolve_image_target` (no
 > traversal, vault-only, never an ignored folder).
 >
+> Captions name the **source location**. For PDFs that mismatch the printed page
+> number against the raw PDF index (front matter, roman-numeral preface, …),
+> `capture_pdf_page` uses the PDF's own embedded page labels automatically
+> (`page.get_label()`), so a caption reads `p.35 (PDF p.47)` rather than `p.47`.
+> Label-less PDFs (many ebook exports) fall back to the raw index, with an optional
+> `page_label_offset` to align them by hand.
+>
 > A third tool, **`crop_screenshot`**, crops an already-saved image to a kept region
 > (Pillow) — the "fix it after the fact" path when a capture grabbed too much, with no
 > need to re-render the PDF or re-download the video. Non-destructive by default
