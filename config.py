@@ -6,6 +6,7 @@ can never read or write outside of it.
 """
 
 import os
+import shutil
 from functools import lru_cache
 from pathlib import Path
 
@@ -18,6 +19,12 @@ load_dotenv()
 # Override via the IGNORED_FOLDERS env var (comma-separated). These are personal
 # folders that aren't part of the knowledge pipeline.
 _DEFAULT_IGNORED_FOLDERS = ("7 - File Vault", "8 - Quests")
+
+# Central vault folder where the screenshot feature saves captured images. A
+# single shared folder (per user decision) keeps every source's figures in one
+# place, embeddable from any note via ``![[<name>.png]]``. Override with the
+# SCREENSHOTS_FOLDER env var.
+_DEFAULT_SCREENSHOTS_FOLDER = "2 - Source Material/Screenshots"
 
 
 @lru_cache(maxsize=1)
@@ -106,3 +113,69 @@ def resolve_in_vault(relative_path: str) -> Path:
             f"Path escapes the vault and was rejected: {relative_path!r}"
         )
     return resolved
+
+
+def get_screenshots_folder() -> str:
+    """Vault-relative folder where captured screenshots are saved.
+
+    Read from the ``SCREENSHOTS_FOLDER`` env var if set, else the built-in
+    default (``2 - Source Material/Screenshots``). Always returned as a clean,
+    forward-slash, vault-relative string.
+    """
+    raw = os.getenv("SCREENSHOTS_FOLDER")
+    folder = raw.strip() if raw and raw.strip() else _DEFAULT_SCREENSHOTS_FOLDER
+    return folder.replace("\\", "/").strip("/")
+
+
+def resolve_image_target(relative_path: str) -> Path:
+    """Resolve a screenshot's save path inside the vault, with extra guards.
+
+    Builds on :func:`resolve_in_vault` (no traversal, vault-only) and then
+    additionally refuses to write into an ignored personal folder — the
+    screenshot feature should never deposit images in ``7 - File Vault`` or
+    ``8 - Quests``.
+
+    Raises:
+        ValueError: if the path is absolute, escapes the vault, or lands inside
+            an ignored top-level folder.
+    """
+    resolved = resolve_in_vault(relative_path)
+    rel = resolved.relative_to(get_vault_path())
+    if is_ignored(rel):
+        raise ValueError(
+            f"Refusing to save a screenshot into an ignored folder: {relative_path!r}"
+        )
+    return resolved
+
+
+@lru_cache(maxsize=8)
+def find_binary(name: str) -> str | None:
+    """Return the full path to a system binary (e.g. ``ffmpeg``), or ``None``.
+
+    Used so the YouTube frame path can return a clean ``{"error": ...}`` when a
+    binary is missing instead of crashing. Cached because PATH lookups are cheap
+    but called per request.
+    """
+    return shutil.which(name)
+
+
+@lru_cache(maxsize=1)
+def find_ffmpeg() -> str | None:
+    """Return a usable ffmpeg executable path, or ``None``.
+
+    Prefers a system ffmpeg on ``PATH`` (so power users keep their own build),
+    then falls back to the static binary bundled with the ``imageio-ffmpeg``
+    pip package. The fallback means the YouTube frame path works after a plain
+    ``pip install`` / ``uv sync`` — no separate system-wide ffmpeg install — which
+    keeps the project's "clone and run" profile intact.
+    """
+    system = shutil.which("ffmpeg")
+    if system:
+        return system
+    try:
+        import imageio_ffmpeg
+
+        exe = imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:  # noqa: BLE001 — package missing or no bundled binary
+        return None
+    return exe if exe and Path(exe).exists() else None

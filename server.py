@@ -6,19 +6,24 @@ standard local stdio transport, so an MCP client (Claude Desktop, Claude Code,
 the MCP Inspector) can browse/edit an Obsidian vault and pull source material
 from YouTube.
 
+It also exposes screenshot tools (capture_pdf_page, get_youtube_frames) that
+turn a part of a source into an HD image saved in the vault for visual learners.
+
 Phase 1: vault tools. Phase 2: YouTube tools. Phase 3: the `process-youtube`
-prompt that ties them together.
+prompt that ties them together. Phase 5: screenshot/visual-capture tools.
 """
 
 from mcp.server.fastmcp import FastMCP
 
 from prompts.process_youtube import register_youtube_prompt
+from tools.screenshots import register_media_tools
 from tools.vault import register_vault_tools
 from tools.youtube import register_youtube_tools
 
 mcp = FastMCP("obsidian-knowledge-pipeline")
 register_vault_tools(mcp)
 register_youtube_tools(mcp)
+register_media_tools(mcp)
 register_youtube_prompt(mcp)
 
 

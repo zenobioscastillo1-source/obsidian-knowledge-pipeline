@@ -9,4 +9,9 @@ dependencies = [
     "mcp[cli]>=1.27.2",
     "python-dotenv>=1.2.2",
     "youtube-transcript-api>=1.2.4",
+    # Screenshot / visual-capture feature (see tools/screenshots.py):
+    "pymupdf>=1.24.0",          # PDF page rendering to HD PNG (pure wheels, no system binary)
+    "pillow>=10.0.0",           # Downscale the HD save into a smaller analysis copy
+    "yt-dlp>=2024.1.0",         # Download a YouTube stream for ffmpeg frame extraction
+    "imageio-ffmpeg>=0.5.1",    # Bundled static ffmpeg binary (fallback when none on PATH)
 ]

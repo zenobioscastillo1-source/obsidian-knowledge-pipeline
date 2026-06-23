@@ -50,6 +50,16 @@ Follow this pipeline exactly:
 
 If the transcript fails, tell me and stop — I may need to paste it manually.
 
+**Optional — capture real visuals (for slide/chart/diagram-heavy videos):** if the
+video clearly shows charts, frameworks, slides, or on-screen code that the words
+alone don't capture, call `get_youtube_frames` with url="{url}" (default scene mode).
+Use the returned frames to (a) make the module rewrites accurate to what was on
+screen, (b) ground the SVG diagrams in the real visuals shown, and (c) embed the
+most instructive saved frames into the matching module using the `embed` snippet
+each frame returns — replace its caption placeholder with a one-line explanation of
+the point it illustrates. Skip this for talking-head/text-only videos to save cost
+(it downloads the video and needs ffmpeg installed).
+
 ---
 
 ## Step 2: Check existing vault state

@@ -105,6 +105,18 @@ All vault paths are **relative to the vault root** (e.g. `3 - Tags/Zettelkasten.
 
 `url` accepts any common form (`watch?v=`, `youtu.be/`, `embed/`, `shorts/`, with extra `&t=` / `&list=` params).
 
+### Screenshots (visual capture)
+
+For visual learners (medical students, artists, anyone who learns from diagrams): turn **a part of a source** into an HD image saved in the vault and ready to embed in the matching note. The full-resolution image is saved for the reader; a downscaled copy is what the model sees (accurate captions, lower token cost). Each saved image comes with an Obsidian `embed` snippet that names **where in the source** it came from (page number / timestamp).
+
+| Tool | What it does | Parameters |
+| --- | --- | --- |
+| `capture_pdf_page` | Render PDF page(s) — or a cropped region of a page — to an HD PNG | `pdf_path` *(required; absolute path or vault-relative)*; `pages` *(default `"1"`, e.g. `"12-14"` / `"3,5,9"`)*, `source_name`, `region` *(`"x0,y0,x1,y1"` fractions)*, `dpi` *(default `300`)*, `analysis_width` *(default `1024`)*, `embed_width` *(default `480`)*, `save` *(default `true`)*, `return_images` *(default `true`)* |
+| `get_youtube_frames` | Sample frames from a video (scene-change or fixed interval) | `url` *(required)*; `mode` *(`"scene"` / `"interval"`)*, `interval_seconds` *(default `30`)*, `scene_threshold` *(default `0.4`)*, `max_frames` *(default `12`)*, `start`, `end`, `source_name`, `analysis_width`, `embed_width`, `save`, `return_images` |
+| `crop_screenshot` | Crop an already-saved screenshot to just the part you want (fix a capture without re-rendering) | `image_path` *(required; the `saved_path` a capture returned)*, `region` *(required; `"x0,y0,x1,y1"` fractions to KEEP)*; `replace` *(default `false` → writes `"<name> cropped.png"`)*, `analysis_width`, `embed_width`, `return_image` |
+
+Images save to one central folder (default `2 - Source Material/Screenshots`, override with the `SCREENSHOTS_FOLDER` env var). Each saved image returns an Obsidian `embed` snippet sized to `embed_width` (`![[img|480]]`) so it appears as a readable thumbnail rather than taking over the note — the saved file stays full resolution (click to enlarge). `capture_pdf_page` and `crop_screenshot` are pure Python (PyMuPDF / Pillow) and need no system binaries. `get_youtube_frames` uses `yt-dlp` + `ffmpeg`; both install with the package — `imageio-ffmpeg` ships a static ffmpeg binary, so **no separate ffmpeg install is required** (a system `ffmpeg` on `PATH` is used in preference if you have one).
+
 ---
 
 ## 🚀 The `process-youtube` pipeline
@@ -206,10 +218,11 @@ Every tool resolves its `path` through `config.resolve_in_vault()` — the singl
 ```
 obsidian-knowledge-pipeline/
 ├── server.py                  # FastMCP entry point — registers tools + prompt, runs over stdio
-├── config.py                  # VAULT_PATH + resolve_in_vault() path guard + ignore-list
+├── config.py                  # VAULT_PATH + resolve_in_vault() path guard + ignore-list + screenshots folder
 ├── tools/
 │   ├── vault.py               # search_vault · read_note · create_note · list_folder
-│   └── youtube.py             # get_youtube_transcript · get_youtube_metadata
+│   ├── youtube.py             # get_youtube_transcript · get_youtube_metadata
+│   └── screenshots.py         # capture_pdf_page · get_youtube_frames · crop_screenshot (HD images → vault)
 ├── prompts/
 │   └── process_youtube.py     # the process-youtube prompt template
 ├── assets/                    # README diagrams (SVG)
@@ -225,7 +238,7 @@ obsidian-knowledge-pipeline/
 - ✅ **Phase 1** — vault read/write tools
 - ✅ **Phase 2** — YouTube transcript + metadata extraction
 - ✅ **Phase 3** — the `process-youtube` prompt → structured notes + per-theme Obsidian Base index
-- 🔭 **Drafted** — `get_youtube_frames`, so Claude can *watch* a video's keyframes (see [the spec](obsidian-mcp-spec.md))
+- ✅ **Phase 5** — screenshot / visual capture: `capture_pdf_page` (PDFs, pure Python) + `get_youtube_frames` (video; ffmpeg bundled via imageio-ffmpeg), saving HD images to the vault for visual learners (see [the spec](obsidian-mcp-spec.md))
 - 📇 **Registry-ready** — a [`server.json`](server.json) scaffold for the [official MCP registry](https://github.com/modelcontextprotocol/registry) is included; listing there also needs a PyPI release + namespace auth via the `mcp-publisher` CLI
 
 ---

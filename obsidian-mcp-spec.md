@@ -576,10 +576,35 @@ Configure the server in both clients.
 
 ---
 
-## Proposed feature: `get_youtube_frames` — video frame extraction (candidate Phase 5)
+## Screenshot / visual capture — `capture_pdf_page` + `get_youtube_frames` (Phase 5)
 
-> **Status:** Draft / not scheduled. Belongs *after* v1 (Phases 1–4). Documented
-> here so it can be picked up cleanly later.
+> **Status:** SHIPPED. Implemented in [`tools/screenshots.py`](tools/screenshots.py),
+> registered via `register_media_tools` in [`server.py`](server.py). Built for visual
+> learners (medical students, artists): turn *a part of a source* into an HD image
+> that lands in the vault and is ready to embed in the matching note.
+>
+> Two sources are supported. **`capture_pdf_page`** renders PDF pages (or a cropped
+> region of a page) to a high-DPI PNG — pure Python via PyMuPDF, no system binaries,
+> so it works out of the box. **`get_youtube_frames`** samples video frames via
+> `yt-dlp` + `ffmpeg`; ffmpeg is resolved by `config.find_ffmpeg()`, which prefers a
+> system `ffmpeg` on PATH and otherwise falls back to the static binary bundled with
+> the `imageio-ffmpeg` pip package — so no separate ffmpeg install is required.
+>
+> Design decisions baked in: images save to **one central folder**
+> (`config.get_screenshots_folder`, default `2 - Source Material/Screenshots`,
+> override via `SCREENSHOTS_FOLDER`); the **full-resolution** image is saved while a
+> **downscaled** copy is what the model sees (accurate captions, lower token cost);
+> every saved image returns an Obsidian `embed` snippet naming its **source location**
+> (page number / timestamp) and sized to `embed_width` (default 480px) so embeds show
+> as thumbnails, not full-screen. Saves are guarded by `resolve_image_target` (no
+> traversal, vault-only, never an ignored folder).
+>
+> A third tool, **`crop_screenshot`**, crops an already-saved image to a kept region
+> (Pillow) — the "fix it after the fact" path when a capture grabbed too much, with no
+> need to re-render the PDF or re-download the video. Non-destructive by default
+> (writes `"<name> cropped.png"`); `replace=true` overwrites the original.
+>
+> The draft below is the original design note kept for context.
 
 ### Why
 

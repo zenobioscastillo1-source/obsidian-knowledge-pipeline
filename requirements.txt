@@ -4,3 +4,10 @@ mcp[cli]
 python-dotenv
 httpx
 youtube-transcript-api
+# Screenshot / visual-capture feature (tools/screenshots.py).
+# imageio-ffmpeg ships a static ffmpeg binary, so the YouTube frame path works
+# without a system-wide ffmpeg install (a system ffmpeg on PATH is still preferred).
+pymupdf
+pillow
+yt-dlp
+imageio-ffmpeg
