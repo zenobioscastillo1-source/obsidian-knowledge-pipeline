@@ -10,7 +10,7 @@
 ![API keys](https://img.shields.io/badge/API_keys-none-27500a?style=flat-square)
 ![Obsidian](https://img.shields.io/badge/Obsidian-Bases-6e56cf?style=flat-square&logo=obsidian&logoColor=white)
 
-**A [Model Context Protocol](https://modelcontextprotocol.io) server that gives Claude safe, structured read/write access to an [Obsidian](https://obsidian.md) vault — and turns YouTube videos into beautifully structured, cross-linked notes.**
+**A [Model Context Protocol](https://modelcontextprotocol.io) server that gives any MCP-capable AI coding agent — Claude Code, Codex, Cursor, Windsurf, Cline, … — safe, structured read/write access to an [Obsidian](https://obsidian.md) vault, and turns YouTube videos into beautifully structured, cross-linked notes.**
 
 [Install](#-install) · [Features](#-features) · [See it in action](#-see-it-in-action) · [Tools](#-tools) · [The pipeline](#-the-process-youtube-pipeline) · [Quick start](#-quick-start) · [Architecture](#-architecture) · [Roadmap](#-roadmap)
 
@@ -20,17 +20,28 @@
 
 ## 📦 Install
 
-An MCP server isn't a global install — **each user registers it once in their own MCP client.** It takes about two minutes:
+An MCP server isn't a global install — **each user registers it once in their own MCP client.** The first two steps are the same for every client:
 
 ```bash
 git clone https://github.com/zenobioscastillo1-source/obsidian-knowledge-pipeline
 cd obsidian-knowledge-pipeline
 uv sync                          # install dependencies
 # then set VAULT_PATH in .env to your Obsidian vault's root folder
-claude mcp add obsidian-knowledge-pipeline -- uv --directory "$PWD" run python server.py
 ```
 
-Restart Claude Code and **11 tools** (4 vault · 2 YouTube · 3 screenshot · 2 canvas) and **3 prompts** (`/process-youtube`, `/analyze-voice`, `/build-canvas`) are available. Using Claude Desktop, the MCP Inspector, or plain pip instead? See [Quick start](#-quick-start). *(`$PWD` works in bash/zsh; on Windows PowerShell use the folder's absolute path.)*
+Then register it with your agent — pick your client:
+
+```bash
+# Claude Code
+claude mcp add obsidian-knowledge-pipeline -- uv --directory "$PWD" run python server.py
+
+# Codex CLI (recent versions; or add the [mcp_servers] block in ~/.codex/config.toml — see Quick start)
+codex mcp add obsidian-knowledge-pipeline -- uv --directory "$PWD" run python server.py
+```
+
+After restarting your client, **11 tools** (4 vault · 2 YouTube · 3 screenshot · 2 canvas) are available. The **3 prompts** (`/process-youtube`, `/analyze-voice`, `/build-canvas`) appear as slash commands in clients that surface MCP prompts (Claude Code, Claude Desktop); in clients that don't yet (e.g. Codex today), drive the same workflows by asking the agent to use the tools. Using Cursor, Windsurf, the MCP Inspector, or plain pip? See [Quick start](#-quick-start). *(`$PWD` works in bash/zsh; on Windows PowerShell use the folder's absolute path.)*
+
+> **Why it's portable:** the server speaks plain MCP over stdio with no provider SDK and no API keys — nothing in it is tied to a specific model or vendor. Any MCP-capable agent that can launch a local stdio server can run it.
 
 ---
 
@@ -300,6 +311,40 @@ Add to `claude_desktop_config.json` (**Windows:** `%APPDATA%\Claude\…`, **macO
 If `uv` isn't on Claude Desktop's PATH, point `command` straight at `.venv/Scripts/python.exe` (Windows) or `.venv/bin/python` (macOS/Linux) with `server.py` as the only arg. Restart Claude Desktop after saving.
 
 </details>
+
+### Connect to Codex
+
+Recent Codex CLI versions accept the same one-liner as Claude Code:
+
+```powershell
+codex mcp add obsidian-knowledge-pipeline -- uv --directory "ABSOLUTE\PATH\TO\obsidian-knowledge-pipeline" run python server.py
+```
+
+<details>
+<summary><b>Or edit <code>~/.codex/config.toml</code> by hand</b></summary>
+
+<br>
+
+```toml
+[mcp_servers.obsidian-knowledge-pipeline]
+command = "uv"
+args = ["--directory", "ABSOLUTE/PATH/TO/obsidian-knowledge-pipeline", "run", "python", "server.py"]
+```
+
+If `uv` isn't on Codex's PATH, point `command` at `.venv/Scripts/python.exe` (Windows) or `.venv/bin/python` (macOS/Linux) with `server.py` as the only `args` entry. Codex currently surfaces the **tools**; run the `process-youtube` / `analyze-voice` / `build-canvas` workflows by asking the agent to use them (the prompt logic lives server-side, so the tool calls are identical).
+
+</details>
+
+### Connect to any other MCP client
+
+Cursor, Windsurf, Cline, Zed and similar all register a local stdio server the same way — a `command` plus `args`. Use the same launch command everywhere:
+
+```
+command: uv
+args:    ["--directory", "ABSOLUTE/PATH/TO/obsidian-knowledge-pipeline", "run", "python", "server.py"]
+```
+
+(or `.venv/Scripts/python.exe` / `.venv/bin/python` with `server.py` if `uv` isn't on the client's PATH). Drop that into the client's MCP config in whatever shape it expects (JSON, TOML, or a UI form) and restart it.
 
 ---
 

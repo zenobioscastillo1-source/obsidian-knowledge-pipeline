@@ -1,7 +1,7 @@
 """The `process-youtube` MCP prompt.
 
-Returns a long instruction template that tells Claude how to drive the YouTube +
-vault tools to turn a video into structured Obsidian notes (modules with SVG
+Returns a long instruction template that tells the agent how to drive the
+YouTube + vault tools to turn a video into structured Obsidian notes (modules with SVG
 diagrams, italic-wikilink tags, a per-source overview note, tag files, and a
 persistent per-theme Obsidian Base index).
 

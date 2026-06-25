@@ -2,9 +2,9 @@
 
 Exposes vault tools (search_vault, read_note, create_note, list_folder) and
 YouTube extraction tools (get_youtube_transcript, get_youtube_metadata) over the
-standard local stdio transport, so an MCP client (Claude Desktop, Claude Code,
-the MCP Inspector) can browse/edit an Obsidian vault and pull source material
-from YouTube.
+standard local stdio transport, so any MCP client (Claude Code, Claude Desktop,
+Codex, Cursor, the MCP Inspector, …) can browse/edit an Obsidian vault and pull
+source material from YouTube. Nothing here is provider-specific.
 
 It also exposes screenshot tools (capture_pdf_page, get_youtube_frames) that
 turn a part of a source into an HD image saved in the vault for visual learners.

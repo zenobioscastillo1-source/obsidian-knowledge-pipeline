@@ -6,12 +6,14 @@ the *intelligence* (how to cluster the notes, what to call each region) in the
 model and the *layout maths* in the tool — the same split the rest of the
 pipeline uses.
 
-For large folders it describes a **map-reduce** flow: cheap reader subagents
-(``reader_model``, default Sonnet) each distil a batch of notes in parallel and
-return structured extracts; the orchestrator (the strong model you're already
-running) then clusters, colours, writes the spine, and calls ``create_canvas``.
-The MCP itself still makes no LLM calls — the fan-out is driven by the host's
-Agent tool, so portability and the no-AI scripting path are preserved.
+For large folders it describes an optional **map-reduce** flow: cheap reader
+sub-agents (``reader_model``, default Sonnet) each distil a batch of notes in
+parallel and return structured extracts; the orchestrator (the strong model
+you're already running) then clusters, colours, writes the spine, and calls
+``create_canvas``. The MCP itself still makes no LLM calls — the fan-out is
+driven by the host's own sub-agent mechanism where it has one (e.g. Claude
+Code's Agent tool), and hosts without one simply read the notes inline. Either
+way portability and the no-AI scripting path are preserved.
 """
 
 from typing import Annotated
@@ -36,12 +38,13 @@ Choose ONE path by size:
 
 **A. Small folder (≤ ~25 notes): read inline.** Just `read_note` each module yourself and write its essence. Fan-out overhead isn't worth it at this scale.
 
-**B. Large folder (> ~25 notes, or you want speed): fan out reader subagents (map step).**
-- Split the module notes into **batches of ~4–6** and spawn one **Agent** per batch, **in parallel** (multiple Agent calls in a single message), with `subagent_type: "general-purpose"` and `model: "{reader_model}"`.
-- Give each subagent this job: *"Read each of these notes (use the Read tool on the absolute path `D:/Obsidian/Talambuhay/<vault-relative path>`, or `read_note`). For EACH note return a compact record — `file` (vault-relative path), `title`, 6–10 load-bearing points, key terms with one-line definitions, the central diagram/visual idea, and a faithful **draft essence of ~120–180 words** in plain prose. Stay faithful to the author's framing and terminology; do not invent. Return all records as one structured block."*
-- The subagents return extracts; **you never have to read every module yourself.**
+**B. Large folder (> ~25 notes) AND your host supports parallel sub-agents: fan out (map step).**
+This path is an optional speed-up for agents that can spawn sub-agents (e.g. Claude Code's `Agent` tool). If your host has no sub-agent mechanism, use path A no matter the size — the result is identical, just produced sequentially.
+- Split the module notes into **batches of ~4–6** and dispatch one sub-agent per batch, **in parallel** where your host allows it. In Claude Code that's one `Agent` call per batch with `subagent_type: "general-purpose"` and `model: "{reader_model}"`; other hosts use their own equivalent.
+- Give each sub-agent this job: *"Read each of these notes with the `read_note` tool (pass the vault-relative path). For EACH note return a compact record — `file` (vault-relative path), `title`, 6–10 load-bearing points, key terms with one-line definitions, the central diagram/visual idea, and a faithful **draft essence of ~120–180 words** in plain prose. Stay faithful to the author's framing and terminology; do not invent. Return all records as one structured block."*
+- The sub-agents return extracts; **you never have to read every module yourself.**
 
-**On the reader model:** default is **Sonnet** — it keeps the nuance an essence needs (key terms, the author's framing). **Haiku** is faster and fine when the notes are short/simple or when you'll tighten every essence yourself in the reduce step; just expect to do more polishing. Pick per the trade-off you want.
+**On the reader model (sub-agent path only):** in Claude Code the default is **Sonnet** — it keeps the nuance an essence needs (key terms, the author's framing). **Haiku** is faster and fine when the notes are short/simple or when you'll tighten every essence yourself in the reduce step. On other hosts, pick the equivalent capable-vs-fast model; hosts without sub-agents ignore this entirely.
 
 ## Step 3: Cluster, polish, assemble (reduce step — you, the orchestrator)
 Using the index structure (Step 1) and the extracts (Step 2):
@@ -81,7 +84,7 @@ def register_canvas_prompt(mcp: FastMCP) -> None:
         ],
         reader_model: Annotated[
             str,
-            Field(description="Model for the fan-out reader subagents: 'sonnet' (default, keeps nuance) or 'haiku' (fastest, more polishing needed). Only used for large folders."),
+            Field(description="Model for the fan-out reader sub-agents: 'sonnet' (default, keeps nuance) or 'haiku' (fastest, more polishing needed). Only used for large folders on hosts that support sub-agents; ignored otherwise."),
         ] = "sonnet",
     ) -> str:
         return (
