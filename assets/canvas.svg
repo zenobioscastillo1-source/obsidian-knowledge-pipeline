@@ -1,0 +1,91 @@
+<svg viewBox="0 0 1200 470" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="A holistic Obsidian Canvas map: an index hub feeding colour-coded column groups of essence cards, joined by a left-to-right spine">
+  <rect x="2" y="2" width="1196" height="466" rx="18" fill="#0b0f19" stroke="#222a3d" stroke-width="2"/>
+  <text x="40" y="46" font-size="18" font-weight="600" fill="#e6e8ee">A whole topic on one <tspan fill="#f0997b">Canvas</tspan></text>
+  <text x="40" y="68" font-size="13" fill="#9aa3b8"><tspan fill="#fac775">build-canvas</tspan> clusters a folder into colour-coded Group columns of essence cards, joined by a left → right spine. Zoom out, see the subject whole.</text>
+
+  <!-- canvas surface -->
+  <rect x="36" y="88" width="1128" height="356" rx="14" fill="#0c1120" stroke="#2b3450" stroke-width="1.5"/>
+  <!-- faint canvas dot grid -->
+  <g fill="#1a2238">
+    <circle cx="120" cy="150" r="1.5"/><circle cx="220" cy="150" r="1.5"/><circle cx="320" cy="150" r="1.5"/><circle cx="420" cy="150" r="1.5"/><circle cx="520" cy="150" r="1.5"/><circle cx="620" cy="150" r="1.5"/><circle cx="720" cy="150" r="1.5"/><circle cx="820" cy="150" r="1.5"/><circle cx="920" cy="150" r="1.5"/><circle cx="1020" cy="150" r="1.5"/>
+    <circle cx="120" cy="250" r="1.5"/><circle cx="220" cy="250" r="1.5"/><circle cx="320" cy="250" r="1.5"/><circle cx="420" cy="250" r="1.5"/><circle cx="520" cy="250" r="1.5"/><circle cx="620" cy="250" r="1.5"/><circle cx="720" cy="250" r="1.5"/><circle cx="820" cy="250" r="1.5"/><circle cx="920" cy="250" r="1.5"/><circle cx="1020" cy="250" r="1.5"/>
+    <circle cx="120" cy="350" r="1.5"/><circle cx="220" cy="350" r="1.5"/><circle cx="320" cy="350" r="1.5"/><circle cx="420" cy="350" r="1.5"/><circle cx="520" cy="350" r="1.5"/><circle cx="620" cy="350" r="1.5"/><circle cx="720" cy="350" r="1.5"/><circle cx="820" cy="350" r="1.5"/><circle cx="920" cy="350" r="1.5"/><circle cx="1020" cy="350" r="1.5"/>
+  </g>
+
+  <!-- spine edges between columns -->
+  <g fill="none">
+    <path d="M250 250 L298 250" stroke="#9c9a92" stroke-width="2.2" opacity="0.7"/>
+    <path d="M298 244 L308 250 L298 256 Z" fill="#9c9a92" opacity="0.8"/>
+    <path d="M566 250 L614 250" stroke="#9c9a92" stroke-width="2.2" opacity="0.7"/>
+    <path d="M614 244 L624 250 L614 256 Z" fill="#9c9a92" opacity="0.8"/>
+    <path d="M882 250 L930 250" stroke="#9c9a92" stroke-width="2.2" opacity="0.7"/>
+    <path d="M930 244 L940 250 L930 256 Z" fill="#9c9a92" opacity="0.8"/>
+  </g>
+  <text x="278" y="240" text-anchor="middle" font-size="10.5" fill="#6f7891">then</text>
+  <text x="594" y="240" text-anchor="middle" font-size="10.5" fill="#6f7891">then</text>
+  <text x="910" y="240" text-anchor="middle" font-size="10.5" fill="#6f7891">then</text>
+
+  <!-- index hub -->
+  <rect x="64" y="196" width="186" height="108" rx="12" fill="#15203a" stroke="#85b7eb" stroke-width="1.25"/>
+  <text x="157" y="234" text-anchor="middle" font-size="14" font-weight="700" fill="#b5d4f4">The Art of Focus</text>
+  <text x="157" y="256" text-anchor="middle" font-size="11.5" fill="#9aa3b8">Overview · the hub</text>
+  <text x="157" y="282" text-anchor="middle" font-size="11" fill="#6f7891">columns hang off this</text>
+
+  <!-- column 1: orange group -->
+  <rect x="308" y="120" width="120" height="270" rx="12" fill="#ef9f27" opacity="0.10"/>
+  <rect x="308" y="120" width="120" height="270" rx="12" fill="none" stroke="#ef9f27" stroke-width="1" opacity="0.55"/>
+  <text x="368" y="142" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1" fill="#fac775">ATTENTION</text>
+  <g>
+    <rect x="320" y="156" width="96" height="64" rx="8" fill="#1a1305" stroke="#ef9f27" stroke-width="0.75"/>
+    <text x="332" y="178" font-size="11.5" font-weight="600" fill="#fac775">The Mind</text>
+    <text x="332" y="196" font-size="10" fill="#c79a4f">why focus leaks</text>
+    <rect x="320" y="232" width="96" height="64" rx="8" fill="#1a1305" stroke="#ef9f27" stroke-width="0.75"/>
+    <text x="332" y="254" font-size="11.5" font-weight="600" fill="#fac775">Distraction</text>
+    <text x="332" y="272" font-size="10" fill="#c79a4f">the dopamine loop</text>
+    <rect x="320" y="308" width="96" height="64" rx="8" fill="#1a1305" stroke="#ef9f27" stroke-width="0.75"/>
+    <text x="332" y="330" font-size="11.5" font-weight="600" fill="#fac775">Stillness</text>
+    <text x="332" y="348" font-size="10" fill="#c79a4f">the quiet baseline</text>
+  </g>
+
+  <!-- column 2: green group -->
+  <rect x="624" y="120" width="120" height="270" rx="12" fill="#5dcaa5" opacity="0.10"/>
+  <rect x="624" y="120" width="120" height="270" rx="12" fill="none" stroke="#5dcaa5" stroke-width="1" opacity="0.55"/>
+  <text x="684" y="142" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1" fill="#9fe1cb">PRACTICE</text>
+  <g>
+    <rect x="636" y="156" width="96" height="64" rx="8" fill="#06140f" stroke="#5dcaa5" stroke-width="0.75"/>
+    <text x="648" y="178" font-size="11.5" font-weight="600" fill="#9fe1cb">Deep Work</text>
+    <text x="648" y="196" font-size="10" fill="#5fa68c">single-tasking</text>
+    <rect x="636" y="232" width="96" height="64" rx="8" fill="#06140f" stroke="#5dcaa5" stroke-width="0.75"/>
+    <text x="648" y="254" font-size="11.5" font-weight="600" fill="#9fe1cb">Systems</text>
+    <text x="648" y="272" font-size="10" fill="#5fa68c">habits &gt; willpower</text>
+    <rect x="636" y="308" width="96" height="64" rx="8" fill="#06140f" stroke="#5dcaa5" stroke-width="0.75"/>
+    <text x="648" y="330" font-size="11.5" font-weight="600" fill="#9fe1cb">Flow</text>
+    <text x="648" y="348" font-size="10" fill="#5fa68c">effortless focus</text>
+  </g>
+
+  <!-- column 3: purple group -->
+  <rect x="940" y="152" width="120" height="206" rx="12" fill="#afa9ec" opacity="0.10"/>
+  <rect x="940" y="152" width="120" height="206" rx="12" fill="none" stroke="#afa9ec" stroke-width="1" opacity="0.55"/>
+  <text x="1000" y="174" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="1" fill="#cecbf6">PURPOSE</text>
+  <g>
+    <rect x="952" y="188" width="96" height="64" rx="8" fill="#11102a" stroke="#afa9ec" stroke-width="0.75"/>
+    <text x="964" y="210" font-size="11.5" font-weight="600" fill="#cecbf6">Direction</text>
+    <text x="964" y="228" font-size="10" fill="#8e8ac4">aim the focus</text>
+    <rect x="952" y="264" width="96" height="64" rx="8" fill="#11102a" stroke="#afa9ec" stroke-width="0.75"/>
+    <text x="964" y="286" font-size="11.5" font-weight="600" fill="#cecbf6">The Self</text>
+    <text x="964" y="304" font-size="10" fill="#8e8ac4">who you become</text>
+  </g>
+
+  <!-- caption -->
+  <rect x="1078" y="120" width="74" height="270" rx="10" fill="#10182a" stroke="#2b3450"/>
+  <text x="1115" y="146" text-anchor="middle" font-size="10.5" font-weight="700" letter-spacing="1" fill="#6f7891">CARDS</text>
+  <text x="1115" y="172" text-anchor="middle" font-size="10" fill="#9aa3b8">each is a</text>
+  <text x="1115" y="186" text-anchor="middle" font-size="10" fill="#9aa3b8">clickable</text>
+  <text x="1115" y="200" text-anchor="middle" font-size="10" fill="#b5d4f4">[[wikilink]]</text>
+  <text x="1115" y="224" text-anchor="middle" font-size="10" fill="#9aa3b8">+ a faithful</text>
+  <text x="1115" y="238" text-anchor="middle" font-size="10" fill="#9aa3b8">essence,</text>
+  <text x="1115" y="252" text-anchor="middle" font-size="10" fill="#9aa3b8">auto-sized.</text>
+  <text x="1115" y="300" text-anchor="middle" font-size="10" fill="#9aa3b8">Colour =</text>
+  <text x="1115" y="314" text-anchor="middle" font-size="10" fill="#9aa3b8">the source's</text>
+  <text x="1115" y="328" text-anchor="middle" font-size="10" fill="#9aa3b8">own parts.</text>
+</svg>

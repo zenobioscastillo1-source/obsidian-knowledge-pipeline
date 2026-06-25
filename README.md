@@ -12,7 +12,7 @@
 
 **A [Model Context Protocol](https://modelcontextprotocol.io) server that gives Claude safe, structured read/write access to an [Obsidian](https://obsidian.md) vault — and turns YouTube videos into beautifully structured, cross-linked notes.**
 
-[Install](#-install) · [Features](#-features) · [Tools](#-tools) · [The pipeline](#-the-process-youtube-pipeline) · [Quick start](#-quick-start) · [Architecture](#-architecture) · [Roadmap](#-roadmap)
+[Install](#-install) · [Features](#-features) · [See it in action](#-see-it-in-action) · [Tools](#-tools) · [The pipeline](#-the-process-youtube-pipeline) · [Quick start](#-quick-start) · [Architecture](#-architecture) · [Roadmap](#-roadmap)
 
 </div>
 
@@ -30,7 +30,7 @@ uv sync                          # install dependencies
 claude mcp add obsidian-knowledge-pipeline -- uv --directory "$PWD" run python server.py
 ```
 
-Restart Claude Code and the 4 vault tools, 2 YouTube tools, and the `/process-youtube` and `/analyze-voice` prompts are available. Using Claude Desktop, the MCP Inspector, or plain pip instead? See [Quick start](#-quick-start). *(`$PWD` works in bash/zsh; on Windows PowerShell use the folder's absolute path.)*
+Restart Claude Code and **11 tools** (4 vault · 2 YouTube · 3 screenshot · 2 canvas) and **3 prompts** (`/process-youtube`, `/analyze-voice`, `/build-canvas`) are available. Using Claude Desktop, the MCP Inspector, or plain pip instead? See [Quick start](#-quick-start). *(`$PWD` works in bash/zsh; on Windows PowerShell use the folder's absolute path.)*
 
 ---
 
@@ -93,7 +93,75 @@ The Voice Profile is saved to your vault once and reused on every future run (re
 
 </td>
 </tr>
+<tr>
+<td width="50%" valign="top">
+
+**🗺️ Canvas maps**
+The `build-canvas` prompt turns a whole topic folder into a zoomed-out **Obsidian Canvas** — colour-coded Group columns of essence cards, joined by a left → right spine. See the subject whole.
+
+</td>
+<td width="50%" valign="top">
+
+**📸 Visual capture**
+Pull HD images out of your sources — `capture_pdf_page` for PDFs and `get_youtube_frames` for video — saved to the vault with a ready-to-paste, timestamped embed.
+
+</td>
+</tr>
 </table>
+
+---
+
+## 🖼️ See it in action
+
+What the pipeline actually produces in your vault — not mockups of a different app, but the exact artifacts each run leaves behind.
+
+### 🎨 A graph view, colour-graded by group
+
+The pipeline writes a graph colour-group config, so every kind of note glows its own colour. Themes, source overviews, modules, and tag concepts each get a hue — and because modules share tags, clusters form on their own.
+
+<div align="center">
+<img src="assets/graph-view.svg" alt="Obsidian graph view with notes colour-graded by group: a purple theme hub, coral source overviews, blue module notes, and green tag concepts, plus a colour legend" width="100%">
+</div>
+
+### 📊 Indexing with a live Obsidian Base
+
+Each theme gets one `<Theme>.base` — a saved query that filters on `theme`, groups every note by `source`, and shows each module's `summary`. Created once; every future video under that theme drops into the index on its own.
+
+<div align="center">
+<img src="assets/base-index.svg" alt="A System Design.base table grouped by source, listing modules with their module number and one-line summaries" width="100%">
+</div>
+
+### 🏷️ A Tags folder that explains itself
+
+Tags here aren't hashtags — each is a real note that **defines the concept**, with aliases and links. The pipeline scans `3 - Tags` first and reuses what's there, only stubbing genuinely new ideas, so the vocabulary stays shared and deduped.
+
+<div align="center">
+<img src="assets/tags.svg" alt="The 3 - Tags folder on the left and an opened Order Flow tag note on the right, showing a definition callout, aliases, and links" width="100%">
+</div>
+
+### 🗺️ A whole topic on one Canvas
+
+`build-canvas` clusters a folder into colour-coded Group columns of essence cards — each a clickable `[[wikilink]]` plus a faithful, auto-sized summary — joined by a left → right spine that follows the source's own parts. Zoom out (Shift+1) and see the subject whole.
+
+<div align="center">
+<img src="assets/canvas.svg" alt="An Obsidian Canvas map: an index hub feeding three colour-coded Group columns of essence cards, connected by a left-to-right spine" width="100%">
+</div>
+
+### 🗣️ Notes written in your own voice
+
+Drop a few of your own writings in once; `analyze-voice` distils them into a reusable Voice Profile. After that every note sounds like you — same facts, your tone and rhythm — while the structure (frontmatter, tables, SVGs, tags, footnotes) stays exactly as specified.
+
+<div align="center">
+<img src="assets/voice.svg" alt="Writing samples are analyzed once into a Voice Profile, which rewrites note prose in your voice while leaving structure intact" width="100%">
+</div>
+
+### 🎞️ The frames that matter, pulled from a video
+
+`get_youtube_frames` samples a video at scene-changes (or a fixed interval), saves each frame HD to the vault, and hands back a timestamped embed — full-res for you to read, a downscaled copy for the model to caption cheaply.
+
+<div align="center">
+<img src="assets/frames.svg" alt="A video timeline with scene-change markers feeding three sampled frames, each saved HD and embedded in the note at its timestamp" width="100%">
+</div>
 
 ---
 
@@ -131,6 +199,17 @@ For visual learners (medical students, artists, anyone who learns from diagrams)
 
 Images save to one central folder (default `2 - Source Material/Screenshots`, override with the `SCREENSHOTS_FOLDER` env var). Each saved image returns an Obsidian `embed` snippet sized to `embed_width` (`![[img|480]]`) so it appears as a readable thumbnail rather than taking over the note — the saved file stays full resolution (click to enlarge). Captions use the **printed page number** when the PDF embeds page labels (so `p.35` matches the book, not the raw PDF index); for label-less PDFs, set `page_label_offset` to align them (e.g. `-12`). `capture_pdf_page` and `crop_screenshot` are pure Python (PyMuPDF / Pillow) and need no system binaries. `get_youtube_frames` uses `yt-dlp` + `ffmpeg`; both install with the package — `imageio-ffmpeg` ships a static ffmpeg binary, so **no separate ffmpeg install is required** (a system `ffmpeg` on `PATH` is used in preference if you have one).
 
+### Canvas
+
+Turn a folder of notes into a holistic **Obsidian Canvas** map. The tool owns the layout maths (column geometry, card auto-sizing, the spine edges); the model owns the intelligence (how to cluster the notes, what to call each region). Drive it with the [`build-canvas`](#-the-process-youtube-pipeline) prompt.
+
+| Tool | What it does | Parameters |
+| --- | --- | --- |
+| `create_canvas` | Write a `.canvas` from an index hub + colour-coded Group columns of essence cards, auto-laying out positions, sizes, and spine edges | `path`, `title`, `columns` *(required)*; `subtitle`, `index_note`, `links` |
+| `read_canvas` | Read a `.canvas` back as parsed JSON + a short summary (since `read_note` only accepts `.md`) | `path` *(required)* |
+
+Each column is `{label, color, question, notes:[{file, id, summary}]}`; colours follow Obsidian's Canvas palette (`"1"` red … `"6"` purple) and adjacent columns differ. Every note path must already exist — the tool refuses to point a card at a missing file.
+
 ---
 
 ## 🚀 The `process-youtube` pipeline
@@ -149,10 +228,13 @@ It splits the transcript into 3–7 cross-linked **modules** (each with an SVG d
 | `theme` | — | Theme that groups this note's Base (e.g. `AI`, `Trading`). **Inferred from the video if omitted.** |
 | `topic_name` | — | Source/course title (used as the `source` property + overview note name). Derived from the video title if omitted. |
 | `target_folder` | — | Subfolder within `6 - Main Notes` (defaults to the source title). |
+| `voice` | — | `mine` to write in your own voice (see `analyze-voice`), `default` for the house style. **Leave blank to be asked.** |
 
 > **Where it lands:** module notes + a `<Source> — Overview` note in `6 - Main Notes/`, new concept stubs in `3 - Tags/`, and a **`<Theme>.base`** in `4 - Indexes/`. Each note carries YAML frontmatter (`theme`, `source`, `type`, `module`, `summary`); the theme Base filters on `theme`, groups by `source`, and shows each module's `summary`. Because a Base is a live query, it's created **once** and every future video under that theme appears in it automatically.
 
 In Claude Code or Claude Desktop, invoke it as a prompt/slash command (e.g. `/process-youtube`) and supply the URL.
+
+**Two companion prompts** round out the workflow: `analyze-voice` builds (or refreshes) the reusable Voice Profile the pipeline writes in, and `build-canvas` turns an already-processed topic folder into a zoomed-out [Canvas map](#-a-whole-topic-on-one-canvas).
 
 ---
 
@@ -236,10 +318,12 @@ obsidian-knowledge-pipeline/
 ├── tools/
 │   ├── vault.py               # search_vault · read_note · create_note · list_folder
 │   ├── youtube.py             # get_youtube_transcript · get_youtube_metadata
-│   └── screenshots.py         # capture_pdf_page · get_youtube_frames · crop_screenshot (HD images → vault)
+│   ├── screenshots.py         # capture_pdf_page · get_youtube_frames · crop_screenshot (HD images → vault)
+│   └── canvas.py              # create_canvas · read_canvas (layout maths for .canvas maps)
 ├── prompts/
 │   ├── process_youtube.py     # the process-youtube prompt template (incl. the voice step)
-│   └── voice.py               # analyze-voice prompt + reusable Voice Profile spec
+│   ├── voice.py               # analyze-voice prompt + reusable Voice Profile spec
+│   └── canvas.py              # build-canvas prompt (cluster a folder into a Canvas map)
 ├── assets/                    # README diagrams (SVG)
 ├── .env                       # VAULT_PATH=…  (git-ignored)
 ├── pyproject.toml             # deps (uv)   ·   requirements.txt (pip / Inspector)
@@ -254,6 +338,8 @@ obsidian-knowledge-pipeline/
 - ✅ **Phase 2** — YouTube transcript + metadata extraction
 - ✅ **Phase 3** — the `process-youtube` prompt → structured notes + per-theme Obsidian Base index
 - ✅ **Phase 5** — screenshot / visual capture: `capture_pdf_page` (PDFs, pure Python) + `get_youtube_frames` (video; ffmpeg bundled via imageio-ffmpeg), saving HD images to the vault for visual learners (see [the spec](obsidian-mcp-spec.md))
+- ✅ **Voice** — opt-in [Voice Profile](#-notes-written-in-your-own-voice): `analyze-voice` learns your writing once and the pipeline reuses it on every run (tone only — structure stays intact)
+- ✅ **Canvas** — `build-canvas` + `create_canvas` / `read_canvas` turn a topic folder into a holistic [Canvas map](#-a-whole-topic-on-one-canvas), with optional reader-subagent fan-out for large folders
 - 📇 **Registry-ready** — a [`server.json`](server.json) scaffold for the [official MCP registry](https://github.com/modelcontextprotocol/registry) is included; listing there also needs a PyPI release + namespace auth via the `mcp-publisher` CLI
 
 ---

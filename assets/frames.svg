@@ -1,0 +1,82 @@
+<svg viewBox="0 0 1200 470" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="get_youtube_frames samples key frames from a video at scene changes or fixed intervals, saves them HD to the vault, and returns timestamped embeds">
+  <rect x="2" y="2" width="1196" height="466" rx="18" fill="#0b0f19" stroke="#222a3d" stroke-width="2"/>
+  <text x="40" y="46" font-size="18" font-weight="600" fill="#e6e8ee">Pull the <tspan fill="#f0997b">frames</tspan> that matter out of a video</text>
+  <text x="40" y="68" font-size="13" fill="#9aa3b8"><tspan fill="#f5c4b3">get_youtube_frames</tspan> samples a video at scene-changes (or a fixed interval), saves each HD to the vault, and hands back a timestamped embed.</text>
+
+  <!-- video player -->
+  <rect x="36" y="92" width="1128" height="150" rx="14" fill="#0e1422" stroke="#2b3450" stroke-width="1.5"/>
+  <rect x="56" y="112" width="280" height="110" rx="10" fill="#141b2d" stroke="#2b3450"/>
+  <circle cx="196" cy="167" r="26" fill="#0b0f19" stroke="#f0997b" stroke-width="1.5"/>
+  <path d="M188 154 L212 167 L188 180 Z" fill="#f5c4b3"/>
+  <text x="76" y="210" font-size="11" fill="#6f7891">How to design a URL shortener</text>
+
+  <!-- timeline -->
+  <text x="372" y="128" font-size="11" font-weight="700" letter-spacing="1" fill="#6f7891">TIMELINE · SCENE DETECTION</text>
+  <rect x="372" y="150" width="752" height="14" rx="7" fill="#1a2238"/>
+  <rect x="372" y="150" width="470" height="14" rx="7" fill="#3a2418"/>
+  <!-- scene-change markers -->
+  <g>
+    <line x1="430" y1="142" x2="430" y2="172" stroke="#f0997b" stroke-width="2.5"/>
+    <line x1="560" y1="142" x2="560" y2="172" stroke="#f0997b" stroke-width="2.5"/>
+    <line x1="690" y1="142" x2="690" y2="172" stroke="#f0997b" stroke-width="2.5"/>
+    <line x1="842" y1="142" x2="842" y2="172" stroke="#f0997b" stroke-width="2.5"/>
+    <circle cx="842" cy="157" r="5" fill="#f5c4b3"/>
+  </g>
+  <text x="372" y="196" font-size="11" fill="#9aa3b8">mode <tspan fill="#f5c4b3">"scene"</tspan> catches each new slide/diagram · or <tspan fill="#f5c4b3">"interval"</tspan> every N seconds · capped by <tspan fill="#f5c4b3">max_frames</tspan></text>
+  <text x="430" y="222" text-anchor="middle" font-size="10.5" fill="#6f7891">1:04</text>
+  <text x="560" y="222" text-anchor="middle" font-size="10.5" fill="#6f7891">3:38</text>
+  <text x="690" y="222" text-anchor="middle" font-size="10.5" fill="#6f7891">6:12</text>
+  <text x="842" y="222" text-anchor="middle" font-size="10.5" fill="#6f7891">9:47</text>
+
+  <!-- arrow down -->
+  <path d="M600 250 L600 274" stroke="#9c9a92" stroke-width="2" opacity="0.6"/>
+  <path d="M594 268 L600 278 L606 268 Z" fill="#9c9a92" opacity="0.7"/>
+
+  <!-- sampled frames row -->
+  <text x="40" y="300" font-size="12" font-weight="700" letter-spacing="1" fill="#6f7891">SAVED HD TO THE VAULT · EMBEDDED AT THE RIGHT TIMESTAMP</text>
+
+  <g>
+    <!-- frame 1 -->
+    <rect x="40" y="316" width="262" height="118" rx="10" fill="#10182a" stroke="#2b3450"/>
+    <rect x="56" y="330" width="124" height="78" rx="6" fill="#1c2740"/>
+    <rect x="66" y="342" width="60" height="8" rx="4" fill="#3a4a6e"/>
+    <rect x="66" y="358" width="100" height="6" rx="3" fill="#28344f"/>
+    <rect x="66" y="372" width="84" height="6" rx="3" fill="#28344f"/>
+    <rect x="66" y="386" width="92" height="6" rx="3" fill="#28344f"/>
+    <text x="194" y="346" font-size="11.5" font-weight="600" fill="#f5c4b3">frame 01</text>
+    <text x="194" y="366" font-size="10.5" fill="#9aa3b8">the problem</text>
+    <rect x="194" y="378" width="92" height="22" rx="11" fill="#1a1305" stroke="#ef9f27" stroke-width="0.6"/>
+    <text x="240" y="393" text-anchor="middle" font-size="10.5" fill="#fac775">▸ 1:04</text>
+
+    <!-- frame 2 -->
+    <rect x="318" y="316" width="262" height="118" rx="10" fill="#10182a" stroke="#2b3450"/>
+    <rect x="334" y="330" width="124" height="78" rx="6" fill="#1c2740"/>
+    <circle cx="364" cy="356" r="12" fill="#26406e"/>
+    <rect x="386" y="350" width="58" height="6" rx="3" fill="#28344f"/>
+    <rect x="386" y="364" width="58" height="6" rx="3" fill="#28344f"/>
+    <path d="M348 392 h96" stroke="#3a4a6e" stroke-width="2"/>
+    <text x="472" y="346" font-size="11.5" font-weight="600" fill="#f5c4b3">frame 02</text>
+    <text x="472" y="366" font-size="10.5" fill="#9aa3b8">the architecture</text>
+    <rect x="472" y="378" width="92" height="22" rx="11" fill="#1a1305" stroke="#ef9f27" stroke-width="0.6"/>
+    <text x="518" y="393" text-anchor="middle" font-size="10.5" fill="#fac775">▸ 3:38</text>
+
+    <!-- frame 3 -->
+    <rect x="596" y="316" width="262" height="118" rx="10" fill="#10182a" stroke="#2b3450"/>
+    <rect x="612" y="330" width="124" height="78" rx="6" fill="#1c2740"/>
+    <rect x="624" y="344" width="30" height="50" rx="3" fill="#26406e"/>
+    <rect x="662" y="356" width="30" height="38" rx="3" fill="#2f5a48"/>
+    <rect x="700" y="338" width="26" height="56" rx="3" fill="#5a3a26"/>
+    <text x="750" y="346" font-size="11.5" font-weight="600" fill="#f5c4b3">frame 03</text>
+    <text x="750" y="366" font-size="10.5" fill="#9aa3b8">the trade-offs</text>
+    <rect x="750" y="378" width="92" height="22" rx="11" fill="#1a1305" stroke="#ef9f27" stroke-width="0.6"/>
+    <text x="796" y="393" text-anchor="middle" font-size="10.5" fill="#fac775">▸ 6:12</text>
+
+    <!-- markdown / embed side -->
+    <rect x="874" y="316" width="290" height="118" rx="10" fill="#0c1424" stroke="#2b3450"/>
+    <text x="892" y="340" font-size="11" font-weight="700" letter-spacing="0.5" fill="#6f7891">IN THE MODULE NOTE</text>
+    <text x="892" y="366" font-size="12" font-family="'SFMono-Regular', Consolas, monospace" fill="#9fe1cb">![[…/frame 02.png|480]]</text>
+    <text x="892" y="388" font-size="11" fill="#9aa3b8">*The architecture — 3:38*</text>
+    <text x="892" y="416" font-size="10.5" fill="#6f7891">full-res saved · downscaled copy is</text>
+    <text x="892" y="430" font-size="10.5" fill="#6f7891">what the model captions (cheap tokens)</text>
+  </g>
+</svg>

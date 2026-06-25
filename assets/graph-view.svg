@@ -1,0 +1,98 @@
+<svg viewBox="0 0 1200 470" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="Obsidian graph view, with notes colour-graded by group: themes, source overviews, modules, and tags">
+  <rect x="2" y="2" width="1196" height="466" rx="18" fill="#0b0f19" stroke="#222a3d" stroke-width="2"/>
+  <text x="40" y="46" font-size="18" font-weight="600" fill="#e6e8ee">Graph view, <tspan fill="#85b7eb">colour-graded</tspan> by group</text>
+  <text x="40" y="68" font-size="13" fill="#9aa3b8">The pipeline writes a graph colour-group config, so each kind of note glows its own colour — structure at a glance.</text>
+
+  <!-- graph canvas -->
+  <rect x="36" y="88" width="788" height="356" rx="14" fill="#0e1422" stroke="#2b3450" stroke-width="1.5"/>
+
+  <!-- edges (drawn first, behind nodes) -->
+  <g stroke-width="1.4" fill="none" opacity="0.45">
+    <path d="M430 250 L250 175" stroke="#afa9ec"/>
+    <path d="M430 250 L540 320" stroke="#afa9ec"/>
+    <path d="M250 175 L165 130" stroke="#5b6b9c"/>
+    <path d="M250 175 L185 245" stroke="#5b6b9c"/>
+    <path d="M250 175 L335 140" stroke="#5b6b9c"/>
+    <path d="M250 175 L345 250" stroke="#5b6b9c"/>
+    <path d="M540 320 L455 235" stroke="#5b6b9c"/>
+    <path d="M540 320 L630 250" stroke="#5b6b9c"/>
+    <path d="M540 320 L625 380" stroke="#5b6b9c"/>
+    <path d="M540 320 L470 395" stroke="#5b6b9c"/>
+    <path d="M165 130 L110 175" stroke="#3f7a64"/>
+    <path d="M335 140 L255 110" stroke="#3f7a64"/>
+    <path d="M335 140 L410 165" stroke="#3f7a64"/>
+    <path d="M345 250 L290 330" stroke="#3f7a64"/>
+    <path d="M185 245 L120 305" stroke="#3f7a64"/>
+    <path d="M455 235 L520 155" stroke="#3f7a64"/>
+    <path d="M630 250 L700 195" stroke="#3f7a64"/>
+    <path d="M630 250 L705 300" stroke="#3f7a64"/>
+    <path d="M625 380 L600 415" stroke="#3f7a64"/>
+    <path d="M470 395 L390 405" stroke="#3f7a64"/>
+    <path d="M345 250 L410 165" stroke="#3f7a64"/>
+  </g>
+
+  <!-- tag nodes (green) -->
+  <g fill="#5dcaa5">
+    <circle cx="110" cy="175" r="6"/>
+    <circle cx="255" cy="110" r="6"/>
+    <circle cx="410" cy="165" r="6"/>
+    <circle cx="290" cy="330" r="6"/>
+    <circle cx="120" cy="305" r="6"/>
+    <circle cx="520" cy="155" r="6"/>
+    <circle cx="700" cy="195" r="6"/>
+    <circle cx="705" cy="300" r="6"/>
+    <circle cx="600" cy="415" r="6"/>
+    <circle cx="390" cy="405" r="6"/>
+  </g>
+
+  <!-- module nodes (blue) -->
+  <g fill="#85b7eb">
+    <circle cx="165" cy="130" r="9"/>
+    <circle cx="185" cy="245" r="9"/>
+    <circle cx="335" cy="140" r="9"/>
+    <circle cx="345" cy="250" r="9"/>
+    <circle cx="455" cy="235" r="9"/>
+    <circle cx="630" cy="250" r="9"/>
+    <circle cx="625" cy="380" r="9"/>
+    <circle cx="470" cy="395" r="9"/>
+  </g>
+
+  <!-- overview nodes (coral) -->
+  <g fill="#f0997b">
+    <circle cx="250" cy="175" r="15" stroke="#0b0f19" stroke-width="1.5"/>
+    <circle cx="540" cy="320" r="15" stroke="#0b0f19" stroke-width="1.5"/>
+  </g>
+
+  <!-- theme hub (purple) -->
+  <circle cx="430" cy="250" r="18" fill="#afa9ec" stroke="#0b0f19" stroke-width="1.5"/>
+  <text x="430" y="285" text-anchor="middle" font-size="11.5" font-weight="600" fill="#cecbf6">Theme</text>
+  <text x="250" y="148" text-anchor="middle" font-size="11" fill="#f5c4b3">Overview</text>
+  <text x="540" y="350" text-anchor="middle" font-size="11" fill="#f5c4b3">Overview</text>
+
+  <!-- legend -->
+  <text x="860" y="116" font-size="12" font-weight="600" letter-spacing="1.5" fill="#6f7891">COLOUR GROUPS</text>
+
+  <g>
+    <circle cx="876" cy="156" r="9" fill="#afa9ec"/>
+    <text x="900" y="161" font-size="14" font-weight="600" fill="#cecbf6">Theme hub</text>
+    <text x="900" y="180" font-size="11.5" fill="#9aa3b8">the .base index node</text>
+  </g>
+  <g>
+    <circle cx="876" cy="216" r="9" fill="#f0997b"/>
+    <text x="900" y="221" font-size="14" font-weight="600" fill="#f5c4b3">Source overview</text>
+    <text x="900" y="240" font-size="11.5" fill="#9aa3b8">one per video / course</text>
+  </g>
+  <g>
+    <circle cx="876" cy="276" r="9" fill="#85b7eb"/>
+    <text x="900" y="281" font-size="14" font-weight="600" fill="#b5d4f4">Module notes</text>
+    <text x="900" y="300" font-size="11.5" fill="#9aa3b8">the 3–7 cross-linked sections</text>
+  </g>
+  <g>
+    <circle cx="876" cy="336" r="9" fill="#5dcaa5"/>
+    <text x="900" y="341" font-size="14" font-weight="600" fill="#9fe1cb">Tag concepts</text>
+    <text x="900" y="360" font-size="11.5" fill="#9aa3b8">shared, deduped vocabulary</text>
+  </g>
+
+  <rect x="860" y="386" width="300" height="42" rx="9" fill="#10182a" stroke="#2b3450"/>
+  <text x="876" y="412" font-size="11.5" fill="#9aa3b8">Tags pull related modules together — clusters form on their own.</text>
+</svg>

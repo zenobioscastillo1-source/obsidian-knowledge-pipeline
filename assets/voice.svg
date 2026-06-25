@@ -1,0 +1,77 @@
+<svg viewBox="0 0 1200 470" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="Write in your own voice: writing samples are analyzed once into a reusable Voice Profile, which reshapes the prose of every note while structure stays intact">
+  <rect x="2" y="2" width="1196" height="466" rx="18" fill="#0b0f19" stroke="#222a3d" stroke-width="2"/>
+  <text x="40" y="46" font-size="18" font-weight="600" fill="#e6e8ee">Notes in <tspan fill="#afa9ec">your own voice</tspan></text>
+  <text x="40" y="68" font-size="13" fill="#9aa3b8">Drop a few of your own writings in once; <tspan fill="#cecbf6">analyze-voice</tspan> distils a reusable Voice Profile. After that, the prose sounds like you — structure untouched.</text>
+
+  <!-- Step 1: samples -->
+  <rect x="36" y="100" width="250" height="330" rx="14" fill="#0e1422" stroke="#2b3450" stroke-width="1.5"/>
+  <text x="56" y="130" font-size="12" font-weight="700" letter-spacing="1" fill="#6f7891">1 · YOUR SAMPLES</text>
+  <text x="56" y="150" font-size="11" fill="#9aa3b8">5 - Templates/Voice Samples</text>
+  <g>
+    <rect x="56" y="166" width="210" height="56" rx="9" fill="#10182a" stroke="#2b3450"/>
+    <text x="72" y="188" font-size="12" font-weight="600" fill="#c7cede">my-essay.md</text>
+    <text x="72" y="206" font-size="10.5" fill="#6f7891">short sentences. dry wit.</text>
+    <rect x="56" y="232" width="210" height="56" rx="9" fill="#10182a" stroke="#2b3450"/>
+    <text x="72" y="254" font-size="12" font-weight="600" fill="#c7cede">old-blog-post.md</text>
+    <text x="72" y="272" font-size="10.5" fill="#6f7891">second person, lots of dashes</text>
+    <rect x="56" y="298" width="210" height="56" rx="9" fill="#10182a" stroke="#2b3450"/>
+    <text x="72" y="320" font-size="12" font-weight="600" fill="#c7cede">journal.md</text>
+    <text x="72" y="338" font-size="10.5" fill="#6f7891">plain words, no jargon</text>
+  </g>
+  <text x="56" y="392" font-size="11" fill="#9aa3b8">Opt in when the pipeline asks.</text>
+  <text x="56" y="412" font-size="11" fill="#6f7891">Decline → tidy house style.</text>
+
+  <!-- arrow 1 -->
+  <path d="M292 265 L330 265" stroke="#9c9a92" stroke-width="2" opacity="0.7"/>
+  <path d="M330 259 L340 265 L330 271 Z" fill="#9c9a92" opacity="0.8"/>
+
+  <!-- Step 2: profile -->
+  <rect x="350" y="100" width="270" height="330" rx="14" fill="#15132e" stroke="#afa9ec" stroke-width="1.25"/>
+  <text x="372" y="130" font-size="12" font-weight="700" letter-spacing="1" fill="#8e8ac4">2 · VOICE PROFILE</text>
+  <text x="372" y="150" font-size="11" fill="#9aa3b8">analyzed once · saved · reused</text>
+
+  <g font-size="12">
+    <circle cx="378" cy="178" r="3" fill="#afa9ec"/>
+    <text x="392" y="182" fill="#cecbf6">Tone: candid, a little wry</text>
+    <circle cx="378" cy="208" r="3" fill="#afa9ec"/>
+    <text x="392" y="212" fill="#cecbf6">Rhythm: short. then a long one.</text>
+    <circle cx="378" cy="238" r="3" fill="#afa9ec"/>
+    <text x="392" y="242" fill="#cecbf6">Diction: plain words &gt; jargon</text>
+    <circle cx="378" cy="268" r="3" fill="#afa9ec"/>
+    <text x="392" y="272" fill="#cecbf6">Quirks: em-dashes, lower-case</text>
+    <circle cx="378" cy="298" r="3" fill="#afa9ec"/>
+    <text x="392" y="302" fill="#cecbf6">Person: speaks to "you"</text>
+  </g>
+  <rect x="372" y="330" width="226" height="76" rx="10" fill="#10182a" stroke="#2b3450"/>
+  <text x="388" y="354" font-size="11" font-weight="600" fill="#cecbf6">Voice Profile.md</text>
+  <text x="388" y="374" font-size="10.5" fill="#9aa3b8">Refresh anytime with</text>
+  <text x="388" y="390" font-size="10.5" fill="#cecbf6">/analyze-voice</text>
+
+  <!-- arrow 2 -->
+  <path d="M626 265 L664 265" stroke="#9c9a92" stroke-width="2" opacity="0.7"/>
+  <path d="M664 259 L674 265 L664 271 Z" fill="#9c9a92" opacity="0.8"/>
+
+  <!-- Step 3: applied -->
+  <rect x="684" y="100" width="480" height="330" rx="14" fill="#0e1422" stroke="#2b3450" stroke-width="1.5"/>
+  <text x="706" y="130" font-size="12" font-weight="700" letter-spacing="1" fill="#6f7891">3 · APPLIED TO EVERY NOTE</text>
+
+  <!-- house style card -->
+  <rect x="706" y="148" width="436" height="104" rx="10" fill="#10182a" stroke="#2b3450"/>
+  <text x="724" y="172" font-size="11" font-weight="600" letter-spacing="0.5" fill="#6f7891">DEFAULT HOUSE STYLE</text>
+  <text x="724" y="196" font-size="12.5" fill="#8a93a8">Order flow refers to the aggregate sequence of</text>
+  <text x="724" y="214" font-size="12.5" fill="#8a93a8">buy and sell orders submitted to the market,</text>
+  <text x="724" y="232" font-size="12.5" fill="#8a93a8">which participants analyze to infer intent.</text>
+
+  <!-- your voice card -->
+  <rect x="706" y="266" width="436" height="104" rx="10" fill="#15132e" stroke="#afa9ec" stroke-width="1"/>
+  <rect x="706" y="266" width="5" height="104" rx="2.5" fill="#afa9ec"/>
+  <text x="724" y="290" font-size="11" font-weight="600" letter-spacing="0.5" fill="#8e8ac4">SAME FACTS, YOUR VOICE</text>
+  <text x="724" y="314" font-size="12.5" fill="#d7d4f4">Order flow is just the tape — every buy and</text>
+  <text x="724" y="332" font-size="12.5" fill="#d7d4f4">sell, hitting the market in real time. Read it</text>
+  <text x="724" y="350" font-size="12.5" fill="#d7d4f4">right and you can see what the crowd wants.</text>
+
+  <!-- intact tag -->
+  <rect x="706" y="386" width="436" height="30" rx="8" fill="#0c1d18" stroke="#1e7a5f" stroke-width="0.75"/>
+  <circle cx="726" cy="401" r="5" fill="#5dcaa5"/>
+  <text x="742" y="405" font-size="11.5" fill="#9fe1cb">Structure stays intact — frontmatter, tables, SVGs, *tags:* and footnotes unchanged.</text>
+</svg>

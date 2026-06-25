@@ -1,0 +1,66 @@
+<svg viewBox="0 0 1200 470" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="A per-theme Obsidian Base: a live table of every module, grouped by source, with summaries">
+  <rect x="2" y="2" width="1196" height="466" rx="18" fill="#0b0f19" stroke="#222a3d" stroke-width="2"/>
+  <text x="40" y="46" font-size="18" font-weight="600" fill="#e6e8ee">Indexing with a live <tspan fill="#afa9ec">Obsidian Base</tspan></text>
+  <text x="40" y="68" font-size="13" fill="#9aa3b8">One <tspan fill="#cecbf6">&lt;Theme&gt;.base</tspan> per theme — a saved query that groups every note by source and shows its summary. New videos appear automatically.</text>
+
+  <!-- base window -->
+  <rect x="36" y="88" width="1128" height="356" rx="14" fill="#0e1422" stroke="#2b3450" stroke-width="1.5"/>
+
+  <!-- title bar -->
+  <rect x="36" y="88" width="1128" height="44" rx="14" fill="#141b2d"/>
+  <rect x="36" y="118" width="1128" height="14" fill="#141b2d"/>
+  <rect x="52" y="103" width="22" height="16" rx="4" fill="#3c3489" stroke="#afa9ec" stroke-width="0.75"/>
+  <text x="63" y="115" text-anchor="middle" font-size="11" fill="#cecbf6">▦</text>
+  <text x="86" y="116" font-size="14" font-weight="600" fill="#cecbf6">System Design.base</text>
+  <rect x="300" y="100" width="150" height="22" rx="11" fill="#10182a" stroke="#2b3450"/>
+  <text x="318" y="115" font-size="11.5" fill="#9aa3b8">filter: theme = "…"</text>
+  <rect x="462" y="100" width="150" height="22" rx="11" fill="#10182a" stroke="#2b3450"/>
+  <text x="480" y="115" font-size="11.5" fill="#9aa3b8">group by: source</text>
+  <text x="1140" y="116" text-anchor="end" font-size="11.5" fill="#6f7891">Table view</text>
+
+  <!-- column headers -->
+  <text x="70" y="156" font-size="11" font-weight="600" letter-spacing="1" fill="#6f7891">NOTE</text>
+  <text x="430" y="156" font-size="11" font-weight="600" letter-spacing="1" fill="#6f7891">MODULE</text>
+  <text x="560" y="156" font-size="11" font-weight="600" letter-spacing="1" fill="#6f7891">SUMMARY</text>
+  <line x1="56" y1="166" x2="1144" y2="166" stroke="#2b3450" stroke-width="1"/>
+
+  <!-- group 1 -->
+  <rect x="56" y="176" width="220" height="22" rx="6" fill="#10233f"/>
+  <text x="70" y="191" font-size="12.5" font-weight="600" fill="#85b7eb">▾ Designing Data-Intensive Apps</text>
+  <text x="262" y="191" text-anchor="end" font-size="11" fill="#6f7891">3</text>
+
+  <g font-size="12.5">
+    <text x="78" y="222" fill="#c7cede">Replication &amp; Partitioning</text>
+    <text x="430" y="222" fill="#9aa3b8">1</text>
+    <text x="560" y="222" fill="#9aa3b8">How data is copied and split across nodes.</text>
+
+    <text x="78" y="250" fill="#c7cede">Consistency &amp; Consensus</text>
+    <text x="430" y="250" fill="#9aa3b8">2</text>
+    <text x="560" y="250" fill="#9aa3b8">Trade-offs behind quorums and Raft.</text>
+
+    <text x="78" y="278" fill="#c7cede">Batch &amp; Stream Processing</text>
+    <text x="430" y="278" fill="#9aa3b8">3</text>
+    <text x="560" y="278" fill="#9aa3b8">Pipelines that reshape data at scale.</text>
+  </g>
+  <line x1="56" y1="294" x2="1144" y2="294" stroke="#1c2334" stroke-width="1"/>
+
+  <!-- group 2 -->
+  <rect x="56" y="306" width="220" height="22" rx="6" fill="#10233f"/>
+  <text x="70" y="321" font-size="12.5" font-weight="600" fill="#85b7eb">▾ Scaling to Millions of Users</text>
+  <text x="262" y="321" text-anchor="end" font-size="11" fill="#6f7891">2</text>
+
+  <g font-size="12.5">
+    <text x="78" y="352" fill="#c7cede">Caching &amp; CDNs</text>
+    <text x="430" y="352" fill="#9aa3b8">1</text>
+    <text x="560" y="352" fill="#9aa3b8">Serving hot data close to the user.</text>
+
+    <text x="78" y="380" fill="#c7cede">Load Balancing</text>
+    <text x="430" y="380" fill="#9aa3b8">2</text>
+    <text x="560" y="380" fill="#9aa3b8">Spreading traffic without hot spots.</text>
+  </g>
+
+  <!-- auto-collect note -->
+  <rect x="56" y="402" width="1088" height="30" rx="8" fill="#10182a" stroke="#2b3450"/>
+  <circle cx="76" cy="417" r="5" fill="#5dcaa5"/>
+  <text x="92" y="421" font-size="11.5" fill="#9aa3b8">Created once. Every future note tagged <tspan fill="#cecbf6">theme: System Design</tspan> drops into this index on its own — no manual editing.</text>
+</svg>
