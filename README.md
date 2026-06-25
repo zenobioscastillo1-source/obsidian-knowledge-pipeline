@@ -157,7 +157,7 @@ Tags here aren't hashtags — each is a real note that **defines the concept**, 
 <div align="center">
 <img src="assets/tags.svg" alt="The 3 - Tags folder on the left and an opened Order Flow tag note on the right, showing a definition callout, aliases, and links" width="100%">
 <br><br>
-<img src="assets/screenshot-tag.png" alt="A real Value Creation tag note in Obsidian — category, graph colour, an About definition, a notes-with-this-tag section, and linked mentions" width="80%">
+<img src="assets/screenshot-tag.png" alt="A real Value Creation tag note in Obsidian — category, graph colour, an About definition, a notes-with-this-tag section, and linked mentions" width="100%">
 <br>
 <sub><i>↑ The real thing — the <code>Value Creation</code> tag note: a definition, its graph colour, and linked mentions from the modules that use it.</i></sub>
 </div>
