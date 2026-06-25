@@ -32,14 +32,21 @@ from typing import Annotated
 from mcp.server.fastmcp import FastMCP
 from pydantic import Field
 
+from prompts.voice import voice_step_text
+
 PROCESS_YOUTUBE_PROMPT = """Process this YouTube video into structured Obsidian notes:
 
 **Video URL:** {url}
 **Theme:** {theme}
 **Source / topic name:** {topic_name}
 **Target folder:** {target_folder}
+**Writing voice:** {voice}
 
 Follow this pipeline exactly:
+
+---
+
+{voice_step}
 
 ---
 
@@ -130,7 +137,8 @@ summary: One line describing what this module covers
 - ELI15 level — assume reader encounters every concept for the first time
 - Bold technical terms and define them inline: **Order flow** (the real-time stream of buy and sell orders hitting the market)
 - Use tables for any structured/comparison data
-- Use analogies and real-world examples to explain abstract concepts]
+- Use analogies and real-world examples to explain abstract concepts
+- Write the prose in the voice resolved in Step 0 (the user's own voice if chosen, otherwise the house style) — the voice shapes tone/phrasing/rhythm only, never the structure above]
 
 ## [Next Section Title]
 
@@ -326,6 +334,7 @@ Place each SVG directly under a `> [!info] Visual: …` callout title line. The 
 - Minimum 1 SVG diagram per module that has a visual concept
 - Beginner-friendly tone throughout (ELI15 level)
 - Never copy-paste from transcript — always rewrite in your own words
+- Write all prose in the voice resolved in Step 0; the user's voice (when chosen) governs tone, phrasing, and rhythm ONLY — never the structure (frontmatter, *tags:*, tables, SVGs, ELI15 clarity, navigation, footnotes are always produced as specified)
 - The theme Base in `4 - Indexes` is PER-THEME and PERSISTENT — create it only if missing, never overwrite it; it auto-collects new notes via its `theme` filter
 - `.base` files are YAML config only — never put [[wikilinks]], *tags:*, prose, or footnotes inside them
 """
@@ -355,9 +364,21 @@ def register_youtube_prompt(mcp: FastMCP) -> None:
             str,
             Field(description="Subfolder within 6 - Main Notes (defaults to the source title if omitted)"),
         ] = "",
+        voice: Annotated[
+            str,
+            Field(
+                description=(
+                    "Writing voice: 'mine' to write in the user's own voice (see "
+                    "the analyze-voice prompt), 'default' for the pipeline's house "
+                    "style. Leave blank to be asked."
+                )
+            ),
+        ] = "",
     ) -> str:
         return (
-            PROCESS_YOUTUBE_PROMPT
+            # The voice step is inserted first so its own {voice} token is then
+            # filled by the .replace below (along with the header line).
+            PROCESS_YOUTUBE_PROMPT.replace("{voice_step}", voice_step_text())
             .replace("{url}", url)
             .replace(
                 "{theme}",
@@ -367,5 +388,10 @@ def register_youtube_prompt(mcp: FastMCP) -> None:
             .replace(
                 "{target_folder}",
                 target_folder or "[use the source title as the subfolder name]",
+            )
+            .replace(
+                "{voice}",
+                voice
+                or "[not specified — ASK the user (see Step 0) whether to use their own voice or the default house style]",
             )
         )

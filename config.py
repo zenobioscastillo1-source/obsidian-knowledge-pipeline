@@ -26,6 +26,13 @@ _DEFAULT_IGNORED_FOLDERS = ("7 - File Vault", "8 - Quests")
 # SCREENSHOTS_FOLDER env var.
 _DEFAULT_SCREENSHOTS_FOLDER = "2 - Source Material/Screenshots"
 
+# "Write in the user's voice" feature. Writing samples are read from this folder
+# (drop a few of your own notes/essays in here), and the analyzed style is saved
+# once to the profile note below and reused on every future run. Both are
+# overridable via the VOICE_SAMPLES_FOLDER / VOICE_PROFILE_PATH env vars.
+_DEFAULT_VOICE_SAMPLES_FOLDER = "5 - Templates/Voice Samples"
+_DEFAULT_VOICE_PROFILE_PATH = "5 - Templates/Voice Profile.md"
+
 
 @lru_cache(maxsize=1)
 def get_vault_path() -> Path:
@@ -125,6 +132,30 @@ def get_screenshots_folder() -> str:
     raw = os.getenv("SCREENSHOTS_FOLDER")
     folder = raw.strip() if raw and raw.strip() else _DEFAULT_SCREENSHOTS_FOLDER
     return folder.replace("\\", "/").strip("/")
+
+
+def get_voice_samples_folder() -> str:
+    """Vault-relative folder the voice feature reads writing samples from.
+
+    Read from the ``VOICE_SAMPLES_FOLDER`` env var if set, else the built-in
+    default (``5 - Templates/Voice Samples``). Always returned as a clean,
+    forward-slash, vault-relative string.
+    """
+    raw = os.getenv("VOICE_SAMPLES_FOLDER")
+    folder = raw.strip() if raw and raw.strip() else _DEFAULT_VOICE_SAMPLES_FOLDER
+    return folder.replace("\\", "/").strip("/")
+
+
+def get_voice_profile_path() -> str:
+    """Vault-relative path of the saved Voice Profile note (analyze once, reuse).
+
+    Read from the ``VOICE_PROFILE_PATH`` env var if set, else the built-in
+    default (``5 - Templates/Voice Profile.md``). Always returned as a clean,
+    forward-slash, vault-relative string.
+    """
+    raw = os.getenv("VOICE_PROFILE_PATH")
+    path = raw.strip() if raw and raw.strip() else _DEFAULT_VOICE_PROFILE_PATH
+    return path.replace("\\", "/").strip("/")
 
 
 def resolve_image_target(relative_path: str) -> Path:

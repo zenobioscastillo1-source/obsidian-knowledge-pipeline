@@ -30,7 +30,7 @@ uv sync                          # install dependencies
 claude mcp add obsidian-knowledge-pipeline -- uv --directory "$PWD" run python server.py
 ```
 
-Restart Claude Code and the 4 vault tools, 2 YouTube tools, and the `/process-youtube` prompt are available. Using Claude Desktop, the MCP Inspector, or plain pip instead? See [Quick start](#-quick-start). *(`$PWD` works in bash/zsh; on Windows PowerShell use the folder's absolute path.)*
+Restart Claude Code and the 4 vault tools, 2 YouTube tools, and the `/process-youtube` and `/analyze-voice` prompts are available. Using Claude Desktop, the MCP Inspector, or plain pip instead? See [Quick start](#-quick-start). *(`$PWD` works in bash/zsh; on Windows PowerShell use the folder's absolute path.)*
 
 ---
 
@@ -76,6 +76,20 @@ Scans `3 - Tags` first and reuses existing concepts, only creating stubs for gen
 
 **📊 Theme Bases**
 The index is a native **Obsidian Base** per theme — grouped by source, auto-collecting every future note you process under that theme.
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+**🗣️ Write in your voice**
+Opt in and the pipeline analyzes samples of your own writing into a reusable **Voice Profile**, then writes notes in your tone, rhythm, and diction. Decline and it uses the default house style.
+
+</td>
+<td width="50%" valign="top">
+
+**♻️ Analyze once, reuse**
+The Voice Profile is saved to your vault once and reused on every future run (refresh anytime with the `analyze-voice` prompt). Voice shapes tone only — structure, tables, SVGs, and tags stay intact.
 
 </td>
 </tr>
@@ -217,14 +231,15 @@ Every tool resolves its `path` through `config.resolve_in_vault()` — the singl
 
 ```
 obsidian-knowledge-pipeline/
-├── server.py                  # FastMCP entry point — registers tools + prompt, runs over stdio
-├── config.py                  # VAULT_PATH + resolve_in_vault() path guard + ignore-list + screenshots folder
+├── server.py                  # FastMCP entry point — registers tools + prompts, runs over stdio
+├── config.py                  # VAULT_PATH + resolve_in_vault() path guard + ignore-list + screenshots/voice folders
 ├── tools/
 │   ├── vault.py               # search_vault · read_note · create_note · list_folder
 │   ├── youtube.py             # get_youtube_transcript · get_youtube_metadata
 │   └── screenshots.py         # capture_pdf_page · get_youtube_frames · crop_screenshot (HD images → vault)
 ├── prompts/
-│   └── process_youtube.py     # the process-youtube prompt template
+│   ├── process_youtube.py     # the process-youtube prompt template (incl. the voice step)
+│   └── voice.py               # analyze-voice prompt + reusable Voice Profile spec
 ├── assets/                    # README diagrams (SVG)
 ├── .env                       # VAULT_PATH=…  (git-ignored)
 ├── pyproject.toml             # deps (uv)   ·   requirements.txt (pip / Inspector)
