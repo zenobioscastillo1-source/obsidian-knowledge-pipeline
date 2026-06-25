@@ -124,7 +124,7 @@ Pull HD images out of your sources — `capture_pdf_page` for PDFs and `get_yout
 
 ## 🖼️ See it in action
 
-What the pipeline actually produces in your vault — not mockups of a different app, but the exact artifacts each run leaves behind.
+What the pipeline actually produces in your vault. Most panels pair a quick **schematic** (how it works) with a **real screenshot** from a live vault below it — not mockups of a different app, but the exact artifacts each run leaves behind.
 
 ### 🎨 A graph view, colour-graded by group
 
@@ -132,6 +132,10 @@ The pipeline writes a graph colour-group config, so every kind of note glows its
 
 <div align="center">
 <img src="assets/graph-view.svg" alt="Obsidian graph view with notes colour-graded by group: a purple theme hub, coral source overviews, blue module notes, and green tag concepts, plus a colour legend" width="100%">
+<br><br>
+<img src="assets/screenshot-graph.png" alt="A real Obsidian graph view of a vault: hundreds of notes coloured by group, with orange, green, pink, teal and tan clusters" width="100%">
+<br>
+<sub><i>↑ The real thing — a live vault of ~1,000 notes, each coloured by its group.</i></sub>
 </div>
 
 ### 📊 Indexing with a live Obsidian Base
@@ -140,6 +144,10 @@ Each theme gets one `<Theme>.base` — a saved query that filters on `theme`, gr
 
 <div align="center">
 <img src="assets/base-index.svg" alt="A System Design.base table grouped by source, listing modules with their module number and one-line summaries" width="100%">
+<br><br>
+<img src="assets/screenshot-base.png" alt="A real Claude AI API base in Obsidian — 194 results grouped by source, with columns for module number, file name, and what each module covers" width="100%">
+<br>
+<sub><i>↑ The real thing — a <code>Claude AI API</code> base, 194 notes grouped by source with a “what it covers” column.</i></sub>
 </div>
 
 ### 🏷️ A Tags folder that explains itself
@@ -148,6 +156,10 @@ Tags here aren't hashtags — each is a real note that **defines the concept**, 
 
 <div align="center">
 <img src="assets/tags.svg" alt="The 3 - Tags folder on the left and an opened Order Flow tag note on the right, showing a definition callout, aliases, and links" width="100%">
+<br><br>
+<img src="assets/screenshot-tag.png" alt="A real Value Creation tag note in Obsidian — category, graph colour, an About definition, a notes-with-this-tag section, and linked mentions" width="80%">
+<br>
+<sub><i>↑ The real thing — the <code>Value Creation</code> tag note: a definition, its graph colour, and linked mentions from the modules that use it.</i></sub>
 </div>
 
 ### 🗺️ A whole topic on one Canvas
@@ -156,6 +168,10 @@ Tags here aren't hashtags — each is a real note that **defines the concept**, 
 
 <div align="center">
 <img src="assets/canvas.svg" alt="An Obsidian Canvas map: an index hub feeding three colour-coded Group columns of essence cards, connected by a left-to-right spine" width="100%">
+<br><br>
+<img src="assets/screenshot-canvas.png" alt="A real Obsidian Canvas — Purpose and Profit Map — with three colour-coded columns (The Thesis, Money and Mind, Your Life's Work) of essence cards joined by a left-to-right spine" width="100%">
+<br>
+<sub><i>↑ The real thing — Dan Koe's <i>Purpose &amp; Profit</i> mapped into three columns: <b>reframe money → find direction → create</b>.</i></sub>
 </div>
 
 ### 🗣️ Notes written in your own voice
@@ -172,6 +188,10 @@ Drop a few of your own writings in once; `analyze-voice` distils them into a reu
 
 <div align="center">
 <img src="assets/frames.svg" alt="A video timeline with scene-change markers feeding three sampled frames, each saved HD and embedded in the note at its timestamp" width="100%">
+<br><br>
+<img src="assets/screenshot-frames.png" alt="A real note — Runner Mobility Routine — with two captured video frames embedded inside a callout above the written instructions" width="100%">
+<br>
+<sub><i>↑ The real thing — captured frames embedded step-by-step in a <code>Runner Mobility Routine</code> note, right above the instructions they illustrate.</i></sub>
 </div>
 
 ---
